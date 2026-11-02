@@ -2,7 +2,9 @@
 
 A one-page marketing site for a **fictional** roofing company. Static HTML, CSS
 and two JavaScript files: no framework, no build step, no dependencies. Every
-image is drawn in SVG, so it ships with no photography at all.
+image is drawn in SVG except the before/after roof, which `tools/render_roof.py`
+(Python, NumPy, Pillow; deterministic) renders into four WebP files in
+`assets/img/`. No photography at all.
 
 It exists to show what a premium roofing site looks like before a real client's
 words and photos are anywhere near it. Read the *Placeholders* section before it

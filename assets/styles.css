@@ -3,14 +3,14 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/assets/fonts/montserrat-var.woff2') format('woff2-variations');
+  src: url('fonts/montserrat-var.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Roboto Slab';
-  src: url('/assets/fonts/roboto-slab-var.woff2') format('woff2-variations');
+  src: url('fonts/roboto-slab-var.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

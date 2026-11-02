@@ -16,9 +16,11 @@ From this folder:
 python -m http.server 4380 --bind 127.0.0.1
 ```
 
-Then open <http://127.0.0.1:4380/>. Serve from the folder root — the assets are
-linked with root-relative paths (`/assets/...`), so opening `index.html` from
-disk will give you an unstyled page.
+Then open <http://127.0.0.1:4380/>. Every asset and page link is relative, so the
+same files work at a domain root, in a subfolder (a GitHub Pages project site,
+for example) and on any static host. Opening `index.html` straight off disk is
+the one case that still wants a server: browsers block the external `<use>`
+reference to the icon sprite over `file://`, so the icons disappear.
 
 No Python? Any static file server will do — `npx serve .`, `npx http-server`,
 or the tiny one this build was previewed with, which lives one level up in the
@@ -27,6 +29,17 @@ workspace tooling folder:
 ```sh
 node ../.tools/serve.mjs "$PWD" 4380
 ```
+
+## Deploy
+
+Static, no build step. On GitHub Pages: **Settings → Pages → Deploy from a
+branch → `main` / `/ (root)`**, which serves this folder at
+`https://<user>.github.io/roofers/` — the relative links mean that subpath works
+with no changes. Netlify, Vercel and Cloudflare Pages all take the repo directly
+with an empty build command and `/` as the output directory.
+
+The only thing a host needs to leave alone is the file names: `index.html` at the
+root, everything else under `assets/`.
 
 ## The page, top to bottom
 

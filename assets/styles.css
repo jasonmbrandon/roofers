@@ -1210,6 +1210,19 @@ strong { font-weight: 620; }
 
   .hero-inner { grid-template-columns: minmax(0, 1fr); align-items: start; }
   .hero { min-height: auto; padding-bottom: 96px; }
+  /* small screens: the scene fills the first screenful, cropped to the
+     sun-and-roof side, and fades into the page below it */
+  .hero-scene {
+    bottom: auto;
+    height: min(100svh, 920px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+  }
+  .hero::after {
+    background:
+      linear-gradient(to bottom, rgba(9, 13, 17, 0.72) 0%, rgba(9, 13, 17, 0.5) 38%, rgba(9, 13, 17, 0.62) 62%, rgba(9, 13, 17, 0.9) 82%, rgba(9, 13, 17, 1) 100%),
+      linear-gradient(90deg, rgba(9, 13, 17, 0.55) 0%, rgba(9, 13, 17, 0.1) 100%);
+  }
   .hero-card { max-width: 420px; }
   .hero-cue { display: none; }
 

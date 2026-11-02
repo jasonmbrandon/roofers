@@ -1,0 +1,122 @@
+/* Your Favorite Roofing — motion layer
+   Everything here is additive: remove this stylesheet and the <script> that
+   pairs with it and the page is a still, readable version of itself.
+   All states are gated on html.js so nothing can be left invisible when the
+   script never runs. */
+
+/* ---------- reading progress ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 90;
+  background: transparent;
+  pointer-events: none;
+}
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(to right, var(--copper-deep), var(--copper-light));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ---------- entrance: hero ---------- */
+
+html.js .hero-copy > * {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: rise 0.9s var(--ease) forwards;
+}
+html.js .hero-copy > *:nth-child(1) { animation-delay: 0.05s; }
+html.js .hero-copy > *:nth-child(2) { animation-delay: 0.14s; }
+html.js .hero-copy > *:nth-child(3) { animation-delay: 0.24s; }
+html.js .hero-copy > *:nth-child(4) { animation-delay: 0.34s; }
+html.js .hero-copy > *:nth-child(5) { animation-delay: 0.44s; }
+
+html.js .hero-card {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: rise 1s var(--ease) 0.5s forwards;
+}
+
+html.js .hero-layer { animation: heroFade 1.6s var(--ease) 0.1s both; }
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* clouds drift very slowly, and only when motion is welcome */
+.hero-clouds { animation: drift 46s linear infinite alternate; }
+.hero-clouds path:nth-child(2) { animation-delay: -12s; }
+@keyframes drift {
+  from { transform: translateX(-14px); }
+  to { transform: translateX(26px); }
+}
+
+.hero-sun { transform-origin: 915px 268px; }
+
+.hero-cue__line { animation: cuePulse 2.8s ease-in-out infinite; }
+@keyframes cuePulse {
+  0%, 100% { transform: scaleX(0.5); opacity: 0.5; }
+  50% { transform: scaleX(1); opacity: 1; }
+}
+
+/* ---------- entrance: sections ---------- */
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+html.js .reveal.is-in { opacity: 1; transform: none; }
+
+html.js .service-grid .reveal:nth-child(2) { transition-delay: 0.07s; }
+html.js .service-grid .reveal:nth-child(3) { transition-delay: 0.14s; }
+html.js .service-grid .reveal:nth-child(4) { transition-delay: 0.07s; }
+html.js .service-grid .reveal:nth-child(5) { transition-delay: 0.14s; }
+html.js .service-grid .reveal:nth-child(6) { transition-delay: 0.21s; }
+
+html.js .steps .reveal:nth-child(2) { transition-delay: 0.06s; }
+html.js .steps .reveal:nth-child(3) { transition-delay: 0.12s; }
+html.js .steps .reveal:nth-child(4) { transition-delay: 0.18s; }
+html.js .steps .reveal:nth-child(5) { transition-delay: 0.24s; }
+
+/* ---------- build scene: initial states ----------
+   JS paints the real states on its first frame. These keep the illustration
+   from flashing an assembled roof before the first paint. */
+
+html.js .build .b-old { opacity: 1; }
+html.js .build .b-felt { clip-path: inset(0 100% 0 0); }
+html.js .build .b-felt-lines { opacity: 0; }
+html.js .build .b-flash { opacity: 0; }
+html.js .build .b-ridge { opacity: 0; transform: translateY(-30px); }
+html.js .build .b-courses g { opacity: 0; }
+
+.build .b-deck,
+.build .b-felt,
+.build .b-felt-lines,
+.build .b-flash,
+.build .b-ridge,
+.build .b-courses g { will-change: transform, opacity; }
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .hero-copy > *,
+  html.js .hero-card,
+  html.js .hero-layer,
+  html.js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .hero-clouds,
+  .hero-cue__line { animation: none; }
+  .scroll-progress { display: none; }
+}

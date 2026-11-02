@@ -1,664 +1,1018 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ridgeline Roofing Co. | Roof replacement and repair in Tampa Bay</title>
-<meta name="description" content="Roof replacement, repair and storm damage help across Tampa Bay. Free roof inspection and a written quote.">
-<meta property="og:title" content="Ridgeline Roofing Co. | Roofs built for Tampa storms">
-<meta property="og:description" content="Free roof inspection and a written quote. Shingle, metal and tile roofs.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-<!--
-  =====================================================================
-  TEMPLATE CONFIG — edit this block for each new client. Every name,
-  number, service, price and area on the page comes from here.
-  Values marked SAMPLE must be replaced before launch.
-  =====================================================================
--->
-<script>
-window.SITE = {
-  name: "Ridgeline Roofing Co.",          // SAMPLE
-  shortName: "Ridgeline",                 // SAMPLE — used in the giant footer wordmark
-  city: "Tampa",                          // SAMPLE — appears in the headline
-  region: "Tampa Bay",                    // SAMPLE
-  state: "FL",
-  phone: "(813) 555-0142",                // SAMPLE (555-01xx numbers are fictional)
-  email: "hello@ridgelineroofing.com",    // SAMPLE
-  street: "",                             // optional street address for Google
-  license: "License # CCC0000000",        // SAMPLE — must be the client's real license
-  quoteTurnaround: "48 hours",            // SAMPLE
-  // HERO VIDEO — the client's own clip (crew on a roof, drone pass over a finished job).
-  // Put the files in /assets and set the paths. Leave "" to use the drawn roofs.
-  // Keep the MP4 under ~4 MB: 6–12 s loop, 1280px wide, no audio.
-  heroVideo: "",                          // e.g. "assets/hero.mp4"
-  heroPoster: "",                         // e.g. "assets/hero.jpg" (first frame, shown before the video plays)
-  social: [ { label: "Instagram", url: "#" }, { label: "Facebook", url: "#" }, { label: "Google reviews", url: "#" } ],
-  colors: { bg: "#133621", surface: "#1a4429", ink: "#f4d96c", muted: "#c7b770", accent: "#f4d96c", accentInk: "#133621" },
-  services: [ // [service, detail, value]
-    ["Roof replacement", "Asphalt shingle", "Most homes in 1–2 days"],
-    ["Roof replacement", "Standing-seam metal", "Quoted after inspection"],
-    ["Roof replacement", "Concrete and clay tile", "Quoted after inspection"],
-    ["Leak repair", "Any roof type", "Usually same week"],
-    ["Storm damage", "Wind, hail and fallen limbs", "Free inspection"],
-    ["Insurance claims", "Photos and report for your adjuster", "Free"],
-    ["Inspections", "Home sale and insurance letters", "Same week"],
-    ["Gutters", "Aluminum, guards", "Added to any roof"],
-    ["Ventilation", "Ridge vents, soffit vents", "Added to any roof"],
-    ["Skylights", "New, replaced or resealed", "Quoted after inspection"]
-  ],
-  // Price per roofing "square" (100 sq ft of roof), installed with tear-off. SAMPLE numbers — set the client's real ranges.
-  materials: {
-    asphalt: { label: "Asphalt shingle", low: 450, high: 650, life: "20–30 years" },
-    metal:   { label: "Standing-seam metal", low: 900, high: 1400, life: "40–60 years" },
-    tile:    { label: "Concrete or clay tile", low: 1000, high: 1600, life: "50+ years" }
-  },
-  areas: ["Tampa", "St. Petersburg", "Clearwater", "Brandon", "Riverview", "Wesley Chapel", "Lutz", "Temple Terrace", "Largo", "Seminole", "Valrico", "Apollo Beach"]
-};
-</script>
-<style>
-:root{
-  --bg:#133621; --surface:#1a4429; --surface-2:#215233; --ink:#f4d96c; --muted:#c7b770; --accent:#f4d96c; --accent-ink:#133621;
-  --paper:#f3ecd6;
-  --step-small:clamp(0.8125rem,0.79rem + 0.1vw,0.875rem);
-  --step-body:clamp(1.0625rem,1rem + 0.25vw,1.1875rem);
-  --step-lead:clamp(1.25rem,1.1rem + 0.7vw,1.625rem);
-  --step-head:clamp(2.25rem,1.3rem + 3.6vw,4.5rem);
-  --step-display:clamp(2.75rem,8.6vw,9.5rem);
-  --m:clamp(16px,2.2vw,32px);
-  --gap:clamp(120px,14vw,200px);
-  --ease:cubic-bezier(.2,.75,.2,1);
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:var(--step-body);line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit}
-img,svg{display:block}
-h1,h2,h3,p{margin:0}
-h1,h2,.display{font-weight:800;letter-spacing:-.035em;line-height:.95}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-::selection{background:var(--ink);color:var(--bg)}
-.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:10px 14px;z-index:99}
-.skip:focus{left:8px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:0;background:var(--accent);color:var(--accent-ink);font:700 15px/1 inherit;font-family:inherit;text-decoration:none;border:0;cursor:pointer;transition:transform .18s var(--ease),background .18s}
-.btn:hover{transform:translateY(-2px)}
-.btn:active{transform:translateY(0) scale(.98)}
-.btn.ghost{background:var(--surface);color:var(--ink)}
-.wrap{padding-inline:var(--m)}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:clamp(12px,1.6vw,24px)}
-
-/* ---------- nav ---------- */
-.nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px var(--m);background:var(--bg)}
-.wordmark{font-weight:800;font-size:18px;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
-.nav .btn{white-space:nowrap}
-.nav ul{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0;font-size:15px}
-.nav ul a:not(.btn){text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:transparent;font-weight:500;transition:text-decoration-color .2s,text-underline-offset .2s}
-.nav ul a:not(.btn):hover{text-decoration-color:currentColor;text-underline-offset:4px}
-.nav .btn{min-height:42px;padding:0 16px}
-@media (max-width:720px){.nav ul li.hide-s,.nav ul li.hide-xs{display:none}.nav ul{gap:16px}.wordmark{font-size:16px}}
-
-/* ---------- hero: sentence split by a frame ---------- */
-.hero{position:relative;height:260svh}
-.hero-stage{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-columns:1fr;align-items:center;padding:0 var(--m)}
-.hero h1{grid-column:1/-1;grid-row:1;position:relative;display:grid;grid-template-columns:1fr 35vw 1fr;column-gap:24px;align-items:center;font-size:clamp(2.75rem,5.2vw,5.75rem);font-weight:800;letter-spacing:-.035em;line-height:.95}
-.hero .half{font-size:1em}
-.hero .half.l{justify-self:start}
-.hero .half.r{justify-self:end;text-align:right}
-.reel{position:relative;height:calc(35vw*9/16 + 168px);overflow:hidden;align-self:center}
-.reel-track{position:absolute;left:0;right:0;top:84px;will-change:transform}
-.frame{display:block;width:100%;aspect-ratio:16/9;background:var(--surface);overflow:hidden;margin-bottom:24px;border-radius:4px}
-.frame svg,.frame video{width:100%;height:100%;object-fit:cover;display:block}
-.frame-cap{position:absolute;left:0;right:0;top:calc(50% + 35vw*9/32 + 60px);font-size:var(--step-small);color:var(--muted);text-align:center}
-.hero-sub{position:absolute;left:var(--m);bottom:32px;max-width:34ch;font-size:18px;color:var(--ink)}
-.hero-sub .btn{margin-top:18px}
-.hero-meta{position:absolute;right:var(--m);bottom:32px;font-size:var(--step-small);color:var(--muted);text-align:right}
-@media (max-width:720px){
-  .hero{height:auto}
-  .hero-stage{position:relative;height:auto;min-height:100svh;display:flex;flex-direction:column;align-items:stretch;padding-top:96px;padding-bottom:40px;gap:14px}
-  .hero h1{display:flex;flex-direction:column;gap:14px}
-  .hero h1{font-size:13vw}
-  .frame-cap{display:none}
-  .hero .half.r{align-self:flex-end}
-  .reel{height:auto}
-  .reel-track{position:relative;top:0;transform:none!important}
-  .frame{aspect-ratio:4/3;margin-bottom:0}
-  .frame:not(:first-child){display:none}
-  .frame-cap{position:static;text-align:left;margin-top:8px}
-  .hero-sub,.hero-meta{position:static;text-align:left;max-width:none}
-  .hero-sub{margin-top:18px}
-  .hero-sub .btn{width:100%}
-}
-
-/* ---------- section rhythm ---------- */
-section{padding-top:var(--gap)}
-.reveal>*{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in>*{opacity:1;transform:none}
-.reveal.in>*:nth-child(2){transition-delay:.08s}.reveal.in>*:nth-child(3){transition-delay:.16s}.reveal.in>*:nth-child(4){transition-delay:.24s}.reveal.in>*:nth-child(5){transition-delay:.32s}
-.no-js .reveal>*{opacity:1;transform:none}
-
-/* ---------- list: statement, table pushed right ---------- */
-.svc h2{grid-column:1/-1;font-size:var(--step-head);max-width:16ch}
-.svc h2 span{display:block;padding-left:3vw}
-.svc-photo{grid-column:1/5;align-self:end;margin-top:96px}
-.svc-name{grid-column:7/8;margin-top:96px;font-size:14px;color:var(--muted)}
-.svc table{grid-column:8/13;margin-top:96px;border-collapse:collapse;width:100%;font-size:16px}
-.svc td{padding:13px 0;vertical-align:top}
-.svc td:first-child{color:var(--muted);width:34%;padding-right:12px}
-.svc td:last-child{text-align:right;padding-left:12px;white-space:nowrap}
-.svc tr:nth-child(4n+1):not(:first-child) td{padding-top:44px}
-.svc tr{transition:background .2s}
-.ph{position:relative;background:var(--surface);aspect-ratio:4/5;display:flex;align-items:flex-end;padding:14px;overflow:hidden}
-.ph svg{position:absolute;inset:0;width:100%;height:100%}
-.ph span{position:relative;font-size:var(--step-small);color:var(--muted);background:var(--bg);padding:6px 9px}
-@media (max-width:900px){
-  .svc h2 span{padding-left:0}
-  .svc-name{display:none}
-  .svc table{grid-column:1/-1;margin-top:48px}
-  .svc-photo{grid-column:6/-1;order:3;margin-top:40px}
-  .svc td{display:block;width:auto!important;padding:0;text-align:left!important;white-space:normal}
-  .svc tr{display:grid;grid-template-columns:1fr auto;column-gap:12px;padding:12px 0}
-  .svc td:nth-child(1){grid-column:1}
-  .svc td:nth-child(2){grid-column:1;color:var(--ink)}
-  .svc td:nth-child(3){grid-column:2;grid-row:1;text-align:right!important}
-  .svc tr:nth-child(4n+1):not(:first-child){padding-top:32px}
-  .svc tr:nth-child(4n+1):not(:first-child) td{padding-top:0}
-}
-
-/* ---------- showcase: one frame, three distances ---------- */
-.show{height:300vh;padding-top:var(--gap);position:relative}
-.show-stage{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
-.show h2{position:absolute;left:0;right:0;text-align:center;font-size:clamp(3rem,7.5vw,8rem);pointer-events:none;z-index:2}
-.show h2 .a{position:absolute;left:0;right:0;bottom:calc(50% + 30vw*5/8 + 12px)}
-.show h2 .b{position:absolute;left:0;right:0;top:calc(50% + 30vw*5/8 + 12px);opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
-.show.s2 h2 .b,.show.s3 h2 .b{opacity:1;transform:none}
-.zoom{width:30vw;aspect-ratio:4/5;overflow:hidden;background:var(--surface);position:relative}
-.zoom svg{width:100%;height:100%;transition:transform .9s var(--ease);transform-origin:50% 50%}
-.show.s2 .zoom svg{transform:scale(1.8);transform-origin:50% 22%}
-.show.s3 .zoom svg{transform:scale(3.2);transform-origin:76% 30%}
-.show-cap{position:absolute;left:calc(50% + 15vw + 32px);top:calc(50% - 30vw*5/8);max-width:28ch;font-size:17px;opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
-.show-cap p+p{margin-top:12px;color:var(--muted)}
-.show.s3 .show-cap{opacity:1;transform:none}
-@media (max-width:720px){
-  .zoom{width:70vw}
-  .show h2{font-size:12vw}
-  .show h2 .a{bottom:calc(50% + 70vw*5/8 + 8px)}
-  .show h2 .b{top:calc(50% + 70vw*5/8 + 8px)}
-  .show-cap{left:var(--m);right:var(--m);top:auto;bottom:24px;max-width:none;text-align:center;font-size:16px}
-}
-
-/* ---------- estimator (the live thing) ---------- */
-.est h2{grid-column:1/7;font-size:var(--step-head);max-width:12ch}
-.est-intro{grid-column:1/6;margin-top:24px;max-width:40ch}
-.est-form{grid-column:1/6;margin-top:48px;display:grid;gap:30px}
-.est-out{grid-column:7/13;grid-row:1/5;background:var(--surface);padding:clamp(24px,3vw,44px);display:flex;flex-direction:column;justify-content:space-between;min-height:560px}
-.est-out .roof{aspect-ratio:16/9;background:var(--surface-2);margin-bottom:28px}
-.est-out .roof svg{width:100%;height:100%}
-.price{font-size:clamp(2.4rem,5.4vw,5.5rem);font-weight:800;letter-spacing:-.04em;line-height:.95;font-variant-numeric:tabular-nums}
-.price-note{margin-top:14px;color:var(--muted);font-size:16px;max-width:46ch}
-.est-out .btn{margin-top:28px;align-self:flex-start}
-.fld label,.fld .lbl{display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:10px}
-.fld output{font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
-input[type=range]{width:100%;accent-color:var(--ink);height:44px}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.seg input{position:absolute;opacity:0;pointer-events:none}
-.seg label{display:flex;flex-direction:column;justify-content:center;min-height:64px;padding:10px 14px;background:var(--surface);cursor:pointer;font-weight:700;font-size:15px;transition:background .18s,color .18s,transform .18s}
-.seg label small{font-weight:400;font-size:13px;color:var(--muted)}
-.seg label:hover{transform:translateY(-2px)}
-.seg input:checked+label{background:var(--ink);color:var(--bg)}
-.seg input:checked+label small{color:var(--bg)}
-.seg input:focus-visible+label{outline:3px solid var(--ink);outline-offset:3px}
-@media (max-width:900px){
-  .est h2,.est-intro,.est-form{grid-column:1/-1}
-  .est-out{grid-column:1/-1;grid-row:auto;margin-top:40px;min-height:0}
-  .est-out .btn{width:100%}
-}
-
-/* ---------- how it works: lines that step across ---------- */
-.steps .line{font-size:clamp(2rem,4.4vw,4.6rem);font-weight:800;letter-spacing:-.035em;line-height:1}
-.steps .stage{display:grid;grid-template-columns:repeat(12,1fr);column-gap:clamp(12px,1.6vw,24px);margin-bottom:56px}
-.steps .stage>div{grid-column-end:13}
-.steps .stage:nth-child(1)>div{grid-column-start:1}
-.steps .stage:nth-child(2)>div{grid-column-start:3}
-.steps .stage:nth-child(3)>div{grid-column-start:5}
-.steps .stage:nth-child(4)>div{grid-column-start:7}
-.steps .stage p:not(.line){margin-top:12px;max-width:38ch;color:var(--muted);font-size:17px}
-.steps .stage:last-child{margin-bottom:0}
-@media (max-width:720px){
-  .steps .line{font-size:8.6vw}
-  .steps .stage{margin-bottom:40px}
-  .steps .stage>div{grid-column:1/-1!important}
-  .steps .stage:nth-child(2)>div{padding-left:6vw}.steps .stage:nth-child(3)>div{padding-left:12vw}.steps .stage:nth-child(4)>div{padding-left:18vw}
-}
-
-/* ---------- proof: names as one sentence ---------- */
-.areas-h{font-size:var(--step-head)}
-.areas .towns{margin-top:32px;font-size:clamp(1.5rem,1rem + 1.6vw,2.25rem);font-weight:700;letter-spacing:-.02em;line-height:1.2;max-width:60ch}
-.areas .town{color:#6f8a5a;transition:color .4s}
-.areas .town.lit{color:var(--ink)}
-.areas .facts{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:56px;font-size:17px}
-.areas .facts b{display:block;font-size:var(--step-lead);letter-spacing:-.02em}
-@media (max-width:720px){.areas .towns{font-size:1.5rem}}
-
-/* ---------- gallery: prints dropped on the headline ---------- */
-.gal{position:relative;margin-top:var(--gap);padding:0;height:100svh;min-height:640px;background:var(--surface);overflow:hidden;display:grid;place-items:center}
-.gal h2{position:relative;z-index:3;font-size:clamp(5rem,12vw,12rem);line-height:.85;text-align:center;letter-spacing:-.05em}
-.print{position:absolute;width:26vw;aspect-ratio:3/4;background:var(--paper);padding:8px;transition:transform .25s var(--ease);cursor:pointer;z-index:1}
-.print:hover,.print:focus-visible{transform:rotate(0) scale(1.02)!important;z-index:5}
-.print .ph{aspect-ratio:auto;height:100%}
-.print{width:21vw}
-.print.p1{left:4vw;top:10%;transform:rotate(-8deg)}
-.print.p2{right:5vw;top:8%;transform:rotate(6deg)}
-.print.p3{width:15vw;right:30vw;bottom:-7vw;transform:rotate(-3deg)}
-.gal-note{position:absolute;left:var(--m);bottom:24px;font-size:16px;max-width:40ch}
-@media (max-width:720px){
-  .gal{height:86svh}
-  .gal{place-items:start center;padding-top:14svh}
-  .gal h2{font-size:22vw}
-  .print{width:44vw}
-  .print.p1{left:5vw;top:auto;bottom:14%}
-  .print.p2{left:auto;right:5vw;top:auto;bottom:20%}
-  .print.p3{display:none}
-  .gal-note{font-size:15px;right:var(--m)}
-}
-
-/* ---------- faq ---------- */
-.faq h2{grid-column:1/-1;font-size:clamp(2.5rem,5.5vw,5.5rem);max-width:14ch}
-.faq .qs{grid-column:5/13;margin-top:80px}
-.faq details{margin:0 -24px 12px;padding:14px 24px;transition:background .25s}
-.faq details[open]{background:var(--surface)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;font-size:clamp(1.15rem,1rem + .6vw,1.5rem);font-weight:500;padding:8px 0}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"";flex:0 0 12px;height:12px;margin-top:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .25s var(--ease)}
-.faq details[open] summary::after{transform:rotate(225deg)}
-.faq details p{max-width:52ch;font-size:17px;padding:6px 0 10px}
-@media (max-width:900px){.faq .qs{grid-column:1/-1;margin-top:48px}.faq details{margin-inline:calc(var(--m)*-1);padding-inline:var(--m)}}
-
-/* ---------- contact: email as display type (inverse) ---------- */
-.contact{margin-top:var(--gap);padding:var(--m);min-height:88svh;background:var(--ink);color:var(--bg);display:grid;grid-template-rows:auto 1fr auto auto;position:relative}
-.contact .ask{font-size:clamp(1.25rem,1rem + .8vw,1.6rem);font-weight:500;max-width:30ch;line-height:1.25}
-.contact .ask strong{font-weight:800}
-.contact .mail{align-self:end;margin:8vh 0 6vh;font-size:clamp(2rem,6.4vw,7rem);font-weight:700;letter-spacing:-.045em;line-height:1;text-decoration:none;overflow-wrap:anywhere;transition:color .2s}
-.contact .mail:hover{color:var(--surface-2)}
-.contact .mail span{display:inline-block}
-.contact .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.contact .btn{background:var(--bg);color:var(--ink)}
-.contact .btn.ghost{background:#e3c95c;color:var(--bg)}
-.contact .corners{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:15px}
-.contact .corners a{margin-left:20px}
-@media (max-width:720px){.contact .mail{font-size:8vw}.contact .mail span{display:block}.contact .corners{flex-direction:column}.contact .corners a{margin:0 16px 0 0}}
-
-/* ---------- footer ---------- */
-footer{position:relative;min-height:calc(26vw + 420px);background:var(--surface);overflow:hidden;padding:var(--gap) var(--m) 0;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;align-content:start}
-footer .inv{grid-column:1/8;font-size:clamp(2.4rem,5vw,5.5rem)}
-footer .inv-wrap .btn{margin-top:28px}
-footer .inv-wrap{grid-column:1/9}
-footer .links{grid-column:10/13;display:grid;gap:10px;font-size:16px;align-content:start}
-footer .legal{position:absolute;left:var(--m);right:var(--m);bottom:calc(26vw*.72);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}
-footer .giant{position:absolute;left:var(--m);bottom:0;font-size:28vw;font-weight:800;letter-spacing:-.06em;line-height:.8;white-space:nowrap;transform:translateY(22%);color:var(--bg)}
-@media (max-width:720px){
-  footer{min-height:calc(34vw + 460px)}
-  footer .inv-wrap,footer .links{grid-column:1/-1}
-  footer .inv{font-size:11vw}
-  footer .inv-wrap .btn{width:100%}
-  footer .links{margin-top:32px;display:flex;flex-wrap:wrap;gap:16px;font-size:15px}
-  footer .giant{font-size:34vw}
-  footer .legal{bottom:calc(34vw*.7);font-size:13px}
-}
-
-/* ---------- mobile call bar ---------- */
-.callbar{display:none}
-@media (max-width:720px){
-  .callbar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;transform:translateY(100%);transition:transform .35s var(--ease)}
-  .callbar.on{transform:none}
-  .callbar a{display:flex;align-items:center;justify-content:center;min-height:56px;font-weight:700;font-size:16px;text-decoration:none;background:var(--ink);color:var(--bg)}
-  .callbar a+a{background:var(--surface-2);color:var(--ink)}
-  body{padding-bottom:56px}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
-  .reveal>*{opacity:1;transform:none}
-  .hero{height:auto}.hero-stage{position:relative}
-  .show{height:auto}.show-stage{position:relative;height:auto;min-height:100svh;padding:15vh 0}
-  .show h2 .b,.show-cap{opacity:1;transform:none}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Favorite Roofing — replacement, repair and storm work</title>
+  <meta name="description" content="Roof replacement, repair, storm damage and gutters, done from the deck up. Free inspection, a written itemised estimate, and a site left clean every day.">
+  <meta name="theme-color" content="#0F151B">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Your Favorite Roofing">
+  <meta property="og:title" content="Your Favorite Roofing — replacement, repair and storm work">
+  <meta property="og:description" content="Roofing done from the deck up: tear-off, deck repairs, new underlayment and flashing, then shingles. Free inspection, written estimate.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="/assets/fonts/roboto-slab-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/motion.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body class="no-js">
-<a class="skip" href="#main">Skip to content</a>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- shared drawings: three roof types, drawn in code (replace frames with client photos when available) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <pattern id="shingle" width="40" height="22" patternUnits="userSpaceOnUse">
-      <rect width="40" height="22" fill="#2c5a3a"/><rect x="1" y="1" width="18" height="18" fill="#3a6b47"/><rect x="21" y="1" width="18" height="18" fill="#356442"/>
-    </pattern>
-    <pattern id="shingle2" width="40" height="44" patternUnits="userSpaceOnUse">
-      <use href="#sRow"/><use href="#sRow" x="-20" y="22"/><use href="#sRow" x="20" y="22"/>
-    </pattern>
-    <g id="sRow"><rect width="19" height="20" fill="#3a6b47"/><rect x="20" width="19" height="20" fill="#30603d"/></g>
-    <pattern id="seam" width="34" height="10" patternUnits="userSpaceOnUse"><rect width="34" height="10" fill="#c7b770"/><rect x="30" width="4" height="10" fill="#f4d96c"/></pattern>
-    <pattern id="tile" width="36" height="26" patternUnits="userSpaceOnUse"><rect width="36" height="26" fill="#a8562f"/><path d="M0 26 Q9 6 18 26 Q27 6 36 26" fill="#c46b3b"/><path d="M0 26 Q9 10 18 26" fill="#d07a46"/></pattern>
-    <symbol id="roofScene" viewBox="0 0 640 360">
-      <rect width="640" height="360" fill="#1a4429"/>
-      <circle cx="520" cy="78" r="34" fill="#f4d96c"/>
-      <rect x="0" y="300" width="640" height="60" fill="#133621"/>
-      <rect x="140" y="200" width="360" height="110" fill="#215233"/>
-      <rect x="200" y="230" width="52" height="46" fill="#133621"/><rect x="390" y="230" width="52" height="46" fill="#133621"/>
-      <rect x="296" y="244" width="48" height="66" fill="#f4d96c"/>
-    </symbol>
-  </defs>
-</svg>
-
-<nav class="nav" aria-label="Main">
-  <a class="wordmark" href="#top" data-c="name">Ridgeline Roofing Co.</a>
-  <ul>
-    <li class="hide-s"><a href="#services">Services</a></li>
-    <li class="hide-xs"><a href="#cost">Cost</a></li>
-    <li class="hide-s"><a href="#faq">Questions</a></li>
-    <li><a class="btn" href="#contact">Free inspection</a></li>
-  </ul>
-</nav>
-
-<main id="main">
-<!-- HERO -->
-<header class="hero" id="top">
-  <div class="hero-stage">
-    <h1>
-      <span class="half l">Built for</span>
-      <span class="reel" aria-hidden="true">
-        <span class="reel-track" id="reelTrack">
-          <span class="frame"><svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Asphalt shingle roof"><use href="#roofScene"/><path d="M110 210 L320 70 L530 210 Z" fill="url(#shingle2)"/><path d="M110 210 L320 70 L530 210" fill="none" stroke="#f4d96c" stroke-width="8" stroke-linejoin="round"/></svg></span>
-          <span class="frame"><svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Standing-seam metal roof"><use href="#roofScene"/><path d="M110 210 L320 70 L530 210 Z" fill="url(#seam)" transform="rotate(0)"/><path d="M110 210 L320 70 L530 210" fill="none" stroke="#f4d96c" stroke-width="8" stroke-linejoin="round"/></svg></span>
-          <span class="frame"><svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Clay tile roof"><use href="#roofScene"/><path d="M110 210 L320 70 L530 210 Z" fill="url(#tile)"/><path d="M110 210 L320 70 L530 210" fill="none" stroke="#f4d96c" stroke-width="8" stroke-linejoin="round"/></svg></span>
-          <span class="frame"><svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Asphalt shingle roof"><use href="#roofScene"/><path d="M110 210 L320 70 L530 210 Z" fill="url(#shingle2)"/><path d="M110 210 L320 70 L530 210" fill="none" stroke="#f4d96c" stroke-width="8" stroke-linejoin="round"/></svg></span>
+  <header class="site-header" data-header>
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Your Favorite Roofing — home">
+        <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+          <path d="M5 25.5 22 11l17 14.5" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.5 24v12h21V24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+          <path d="M18.5 36v-7h7v7" fill="currentColor"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Your Favorite</span>
+          <span class="brand-sub">Roofing</span>
         </span>
-      </span>
-      <span class="half r"><span data-c="city">Tampa</span> storms.</span>
-    </h1>
-    <div class="hero-sub">
-      <p><span data-c="name">Ridgeline Roofing Co.</span> replaces and repairs roofs across <span data-c="region">Tampa Bay</span>. Free inspection, written quote in <span data-c="quoteTurnaround">48 hours</span>.</p>
-      <a class="btn" href="#contact">Book a free inspection</a>
-    </div>
-    <p class="hero-meta">Call <a href="tel:" data-tel data-c="phone">(813) 555-0142</a></p>
-  </div>
-</header>
+      </a>
 
-<!-- SERVICES -->
-<section class="svc wrap" id="services" aria-labelledby="svc-h">
-  <div class="grid reveal">
-    <h2 id="svc-h">Every roof job, <span>start to finish.</span></h2>
-    <div class="svc-photo"><div class="ph"><svg viewBox="0 0 400 500" aria-hidden="true"><rect width="400" height="500" fill="#1a4429"/><path d="M0 260 L200 120 L400 260 V500 H0Z" fill="url(#shingle2)"/><path d="M0 260 L200 120 L400 260" fill="none" stroke="#f4d96c" stroke-width="10"/></svg><span>Client photo: crew on a roof</span></div></div>
-    <p class="svc-name">Services</p>
-    <table id="svcTable"><tbody></tbody></table>
-  </div>
-</section>
+      <nav class="nav" id="site-nav" aria-label="Sections">
+        <a href="#anatomy">Anatomy</a>
+        <a href="#build">How it&rsquo;s built</a>
+        <a href="#services">Services</a>
+        <a href="#work">Before &amp; after</a>
+        <a href="#process">Process</a>
+        <a href="#faq">Questions</a>
+      </nav>
 
-<!-- SHOWCASE: one frame, three distances -->
-<div class="show" id="details" aria-labelledby="show-h">
-  <div class="show-stage">
-    <h2 id="show-h"><span class="a">Look closer</span> <span class="b">at the details.</span></h2>
-    <div class="zoom">
-      <svg viewBox="0 0 400 500" role="img" aria-label="Drawing of a house roof with ridge vent and chimney flashing">
-        <rect width="400" height="500" fill="#1a4429"/>
-        <rect x="280" y="70" width="44" height="110" fill="#215233"/>
-        <rect x="274" y="62" width="56" height="14" fill="#f4d96c"/>
-        <path d="M30 250 L200 110 L370 250 Z" fill="url(#shingle2)"/>
-        <rect x="150" y="104" width="100" height="12" fill="#f4d96c"/>
-        <rect x="154" y="98" width="92" height="6" fill="#c7b770"/>
-        <path d="M282 152 L300 152 L300 160 L322 160 L322 142 L282 142Z" fill="#c7b770"/>
-        <rect x="278" y="158" width="48" height="8" fill="#f4d96c"/>
-        <path d="M30 250 L200 110 L370 250" fill="none" stroke="#f4d96c" stroke-width="6"/>
-        <rect x="24" y="250" width="352" height="8" fill="#c7b770"/>
-        <rect x="60" y="258" width="280" height="190" fill="#215233"/>
-        <rect x="95" y="300" width="60" height="56" fill="#133621"/><rect x="245" y="300" width="60" height="56" fill="#133621"/>
-        <rect x="176" y="350" width="48" height="98" fill="#f4d96c"/>
-        <rect x="0" y="448" width="400" height="52" fill="#133621"/>
-      </svg>
-    </div>
-    <div class="show-cap"><p>Ridge vents, drip edge, flashing at every chimney and wall. The parts most crews rush are where leaks start, so they get the most time.</p><p>We photograph each one before we close up.</p></div>
-  </div>
-</div>
-
-<!-- ESTIMATOR -->
-<section class="est wrap" id="cost" aria-labelledby="est-h">
-  <div class="grid">
-    <h2 id="est-h">What will my roof cost?</h2>
-    <p class="est-intro">Move the sliders to match your home. You get a ballpark from our current price ranges now, and an exact written quote after the free inspection.</p>
-    <form class="est-form" id="est" onsubmit="return false">
-      <div class="fld">
-        <label for="area">Home size (living area) <output id="areaOut">2,000 sq ft</output></label>
-        <input type="range" id="area" min="800" max="5000" step="100" value="2000">
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+15550100199">
+          <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-phone"></use></svg>
+          (555) 010-0199
+        </a>
+        <a class="btn btn--accent btn--sm" href="#quote">Free inspection</a>
       </div>
-      <div class="fld">
-        <span class="lbl" id="pitchL">Roof steepness</span>
-        <div class="seg" role="radiogroup" aria-labelledby="pitchL">
-          <input type="radio" name="pitch" id="p1" value="1.08"><label for="p1">Low<small>Barely sloped</small></label>
-          <input type="radio" name="pitch" id="p2" value="1.18" checked><label for="p2">Medium<small>Most homes</small></label>
-          <input type="radio" name="pitch" id="p3" value="1.35"><label for="p3">Steep<small>Hard to walk</small></label>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <svg class="icon icon-menu" aria-hidden="true"><use href="/assets/sprite.svg#i-menu"></use></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="/assets/sprite.svg#i-close"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero" id="top">
+      <div class="hero-scene" aria-hidden="true">
+        <svg class="hero-svg" viewBox="0 0 1200 780" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="h-sky" x1="0" y1="0" x2="0.05" y2="1">
+              <stop offset="0" stop-color="#080C10"/>
+              <stop offset="0.4" stop-color="#15202A"/>
+              <stop offset="0.7" stop-color="#2C3A44"/>
+              <stop offset="0.87" stop-color="#5D4D43"/>
+              <stop offset="1" stop-color="#8B6244"/>
+            </linearGradient>
+            <radialGradient id="h-sun" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#F2B582" stop-opacity="0.85"/>
+              <stop offset="0.42" stop-color="#D98A52" stop-opacity="0.4"/>
+              <stop offset="1" stop-color="#C97545" stop-opacity="0"/>
+            </radialGradient>
+            <pattern id="h-courses" width="96" height="88" patternUnits="userSpaceOnUse" patternTransform="rotate(-26)">
+              <rect width="96" height="88" fill="#232D36"/>
+              <rect y="44" width="96" height="44" fill="#1F2831"/>
+              <path d="M0 43.5H96M0 87.5H96" stroke="#121A21" stroke-width="3"/>
+              <path d="M32 43.5V31M64 43.5V31" stroke="#121A21" stroke-width="2.2"/>
+              <path d="M16 87.5V75M48 87.5V75M80 87.5V75" stroke="#121A21" stroke-width="2.2"/>
+              <path d="M0 31H96M0 75H96" stroke="#2E3B45" stroke-width="1.1" opacity="0.45"/>
+            </pattern>
+            <linearGradient id="h-shade" x1="0.1" y1="0.1" x2="0.75" y2="1">
+              <stop offset="0" stop-color="#0B1015" stop-opacity="0"/>
+              <stop offset="0.5" stop-color="#0B1015" stop-opacity="0.28"/>
+              <stop offset="1" stop-color="#080C10" stop-opacity="0.82"/>
+            </linearGradient>
+            <linearGradient id="h-gutter" x1="0" y1="0" x2="1" y2="0.3">
+              <stop offset="0" stop-color="#9EA9AF"/>
+              <stop offset="0.6" stop-color="#77848B"/>
+              <stop offset="1" stop-color="#55626A"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="1200" height="780" fill="url(#h-sky)"/>
+
+          <g class="hero-layer" data-depth="0.12">
+            <circle cx="1004" cy="246" r="236" fill="url(#h-sun)"/>
+            <circle cx="1004" cy="246" r="57" fill="#F4C393"/>
+            <circle cx="1004" cy="246" r="57" fill="none" stroke="#FBD9B6" stroke-width="1.5" opacity="0.6"/>
+          </g>
+
+          <g class="hero-clouds" fill="#E8DCCB" opacity="0.1">
+            <path d="M120 196h236a24 24 0 0 0 0-48h-26a36 36 0 0 0-66-12 30 30 0 0 0-40 24H120z"/>
+            <path d="M700 118h176a20 20 0 0 0 0-40h-22a30 30 0 0 0-56-9 26 26 0 0 0-34 21h-64z"/>
+            <path d="M366 318h196a18 18 0 0 0 0-36h-24a28 28 0 0 0-52-8 24 24 0 0 0-30 20h-90z"/>
+          </g>
+
+          <!-- distant treeline -->
+          <g class="hero-layer" data-depth="0.28" fill="#0D151B">
+            <path d="M0 622c48-14 78-34 112-34s48 16 80 12 38-24 70-24 46 24 82 28 52-10 84-6 46 18 76 10 42-22 72-18 48 26 78 30 46-8 78-4v334H0z"/>
+            <g opacity="0.85">
+              <path d="M64 622l26-58 26 58zM112 622l20-44 20 44zM948 622l22-50 22 50z"/>
+            </g>
+          </g>
+
+          <!-- the roof plane, bottom right -->
+          <g class="hero-house" data-depth="0.5">
+            <clipPath id="h-plane"><polygon points="560,780 1200,432 1200,780"/></clipPath>
+            <g clip-path="url(#h-plane)">
+              <rect x="520" y="380" width="720" height="440" fill="url(#h-courses)"/>
+              <rect x="520" y="380" width="720" height="440" fill="url(#h-shade)"/>
+              <g>
+                <ellipse cx="868" cy="716" rx="36" ry="9" fill="#080C10" opacity="0.45"/>
+                <rect x="854" y="640" width="28" height="76" fill="#586469"/>
+                <ellipse cx="868" cy="640" rx="14" ry="5.5" fill="#75828A"/>
+                <ellipse cx="868" cy="630" rx="20" ry="6.5" fill="#8C979D"/>
+                <rect x="848" y="622" width="40" height="9" rx="2.5" fill="#9BA6AB"/>
+              </g>
+            </g>
+
+            <!-- eave shadow, fascia, gutter -->
+            <g>
+              <path d="M560 780 1200 432" stroke="#080C10" stroke-width="40" stroke-linecap="round" opacity="0.85"/>
+              <path d="M557 775 1197 427" stroke="#2A343B" stroke-width="15" stroke-linecap="round"/>
+              <path d="M556 772 1196 424" stroke="#3C474E" stroke-width="4" stroke-linecap="round"/>
+              <path d="M549 757 1189 409" stroke="url(#h-gutter)" stroke-width="11" stroke-linecap="round"/>
+              <path d="M546 752 1186 404" stroke="#B9C3C7" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <g stroke="#5C686E" stroke-width="2.4" opacity="0.75">
+                <path d="M610 739l10 6M714 683l10 6M818 627l10 6M922 571l10 6M1026 515l10 6M1130 459l10 6"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Residential &amp; light commercial roofing</p>
+          <h1>Your roof, handled<br><em>from the deck up.</em></h1>
+          <p class="hero-sub">Tear-offs, repairs and storm work by a crew that shows you what it found before it covers it back up. Free inspection, a written estimate, and a driveway swept every day.</p>
+          <div class="hero-actions">
+            <a class="btn btn--accent" href="#quote">
+              Book a free inspection
+              <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-arrow"></use></svg>
+            </a>
+            <a class="btn btn--ghost" href="#build">
+              See how a roof goes on
+              <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-arrow-down"></use></svg>
+            </a>
+          </div>
+          <ul class="hero-chips">
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-check"></use></svg>Free roof inspection</li>
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-check"></use></svg>Itemised written estimate</li>
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-check"></use></svg>Workmanship warranty</li>
+          </ul>
+        </div>
+
+        <aside class="hero-card">
+          <p class="hero-card__title">Book a visit</p>
+          <dl class="hero-facts">
+            <div>
+              <dt><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-clock"></use></svg>Inspection</dt>
+              <dd>Free, and no obligation to book the work.</dd>
+            </div>
+            <div>
+              <dt><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-pin"></use></svg>Service area</dt>
+              <dd>Our city and the towns around it. Ask if you&rsquo;re on the edge.</dd>
+            </div>
+            <div>
+              <dt><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-phone"></use></svg>Storm damage</dt>
+              <dd>Water coming in now? Call and we&rsquo;ll come out.</dd>
+            </div>
+          </dl>
+          <a class="hero-card__link" href="#quote">
+            Pick a time
+            <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-arrow"></use></svg>
+          </a>
+        </aside>
+      </div>
+
+      <div class="hero-cue" aria-hidden="true">
+        <span class="hero-cue__line"></span>
+        <span>Scroll &mdash; the roof goes on below</span>
+      </div>
+    </section>
+
+    <!-- ═══════════ ANATOMY ═══════════ -->
+    <section class="anatomy section" id="anatomy">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Roof anatomy</p>
+          <h2>What&rsquo;s actually<br><em>under the shingles.</em></h2>
+          <p class="lede">A roof is a system layered over your house, not one sheet of tabs. Pick a layer to see what it does &mdash; and what happens to the rooms below when it&rsquo;s skipped.</p>
+        </div>
+
+        <div class="anatomy-grid" data-anatomy data-active="shingle">
+          <figure class="anatomy-figure">
+            <svg viewBox="0 0 900 540" role="img" aria-labelledby="anatomy-title">
+              <title id="anatomy-title">Cut-away of a roof build-up showing the deck, underlayment, shingles, eave membrane, drip edge, flashing, ridge vent and gutter</title>
+              <defs>
+                <pattern id="a-wood" width="70" height="46" patternUnits="userSpaceOnUse">
+                  <rect width="70" height="46" fill="#B58A57"/>
+                  <path d="M0 45.4H70" stroke="#8A6334" stroke-width="2.2"/>
+                  <path d="M22 45.4V16M52 45.4V16" stroke="#9B7440" stroke-width="1.4" opacity="0.8"/>
+                  <path d="M6 12c8 3 13-3 21 0" stroke="#A57C48" stroke-width="1.2" fill="none" opacity="0.6"/>
+                  <path d="M8 34c9 3 14-3 22 0" stroke="#A57C48" stroke-width="1.1" fill="none" opacity="0.45"/>
+                </pattern>
+                <pattern id="a-tabs" width="76" height="58" patternUnits="userSpaceOnUse">
+                  <rect width="76" height="58" fill="#3A444D"/>
+                  <path d="M0 28.6H76M0 57.4H76" stroke="#161E25" stroke-width="2.8"/>
+                  <path d="M26 57.4V43M52 57.4V43" stroke="#161E25" stroke-width="2.2"/>
+                  <path d="M14 28.6V18M40 28.6V18M66 28.6V18" stroke="#161E25" stroke-width="2"/>
+                  <path d="M0 18H76M0 43H76" stroke="#4A5761" stroke-width="1.2" opacity="0.55"/>
+                </pattern>
+                <linearGradient id="a-metal" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#D7DEE1"/>
+                  <stop offset="0.5" stop-color="#A3AFB4"/>
+                  <stop offset="1" stop-color="#7C898F"/>
+                </linearGradient>
+                <linearGradient id="a-brick" x1="0" y1="0" x2="1" y2="0.4">
+                  <stop offset="0" stop-color="#4C5255"/>
+                  <stop offset="1" stop-color="#343A3D"/>
+                </linearGradient>
+              </defs>
+
+              <rect width="900" height="540" fill="#0B1218"/>
+              <circle cx="660" cy="130" r="230" fill="#C97545" opacity="0.09"/>
+
+              <!-- chimney, rising through the roof -->
+              <g>
+                <rect x="495" y="58" width="78" height="126" fill="url(#a-brick)"/>
+                <g stroke="#565C60" stroke-width="1.4" opacity="0.9">
+                  <path d="M495 84h78M495 110h78M495 136h78M495 162h78"/>
+                  <path d="M521 84v26M560 110v26M534 136v26M508 162v22"/>
+                </g>
+                <rect x="485" y="46" width="98" height="16" rx="2" fill="#5E6569"/>
+              </g>
+
+              <!-- the slope, cut so the layers read as stacked bands -->
+              <g transform="translate(200 470) rotate(-26)">
+                <g class="part" data-part="deck">
+                  <rect x="-6" y="-46" width="576" height="46" fill="url(#a-wood)"/>
+                  <rect x="-6" y="-46" width="576" height="46" fill="none" stroke="#6D4A24" stroke-width="1.8"/>
+                </g>
+
+                <g class="part" data-part="eave">
+                  <rect x="0" y="-62" width="150" height="16" fill="#2C5967"/>
+                  <rect x="0" y="-62" width="150" height="16" fill="none" stroke="#57A0B2" stroke-width="1.4" stroke-dasharray="6 4"/>
+                </g>
+
+                <g class="part" data-part="underlayment">
+                  <rect x="-6" y="-62" width="576" height="16" fill="#26333D"/>
+                  <rect x="-6" y="-62" width="576" height="16" fill="none" stroke="#5E7280" stroke-width="1.4"/>
+                </g>
+
+                <g class="part" data-part="shingle">
+                  <rect x="-8" y="-120" width="576" height="58" fill="url(#a-tabs)"/>
+                  <rect x="-8" y="-120" width="576" height="58" fill="none" stroke="#0E1519" stroke-width="2.4"/>
+                  <path d="M-8 -120H568" stroke="#61707B" stroke-width="1.6"/>
+                </g>
+
+                <g class="part" data-part="drip">
+                  <path d="M-22 -128H-4v14h-18z" fill="url(#a-metal)"/>
+                  <path d="M-22 -114H-4v54h-18z" fill="url(#a-metal)" stroke="#5D6A70" stroke-width="1.2"/>
+                </g>
+
+                <g class="part" data-part="ridge">
+                  <rect x="536" y="-120" width="42" height="58" fill="#161E24"/>
+                  <path d="M542 -114v46M552 -114v46M562 -114v46M572 -114v46" stroke="#4B5761" stroke-width="1.8"/>
+                  <rect x="528" y="-132" width="60" height="16" rx="2" fill="#3A444D" stroke="#0E1519" stroke-width="2"/>
+                </g>
+              </g>
+
+              <!-- flashing where the chimney meets the shingles -->
+              <g class="part" data-part="flashing">
+                <path d="M483 168H585v20H483z" fill="url(#a-metal)" stroke="#5D6A70" stroke-width="1.2"/>
+                <path d="M483 188H585v5H483z" fill="#6E7B81"/>
+                <path d="M470 146 483 168 483 188 468 164z" fill="url(#a-metal)"/>
+              </g>
+
+              <!-- fascia, gutter and downspout -->
+              <rect x="182" y="462" width="24" height="72" fill="#2A343C"/>
+              <rect x="182" y="462" width="24" height="72" fill="none" stroke="#151D23" stroke-width="1.4"/>
+
+              <g class="part" data-part="gutter">
+                <path d="M146 466q0-8 8-8h30q8 0 8 8v12q0 10-10 10h-26q-10 0-10-10z" fill="url(#a-metal)" stroke="#5D6A70" stroke-width="1.4"/>
+                <rect x="154" y="488" width="20" height="52" fill="url(#a-metal)"/>
+                <path d="M154 504h20M154 524h20" stroke="#7C898F" stroke-width="2.4"/>
+              </g>
+
+              <!-- numbered markers -->
+              <g class="markers">
+                <g class="marker" data-part="shingle"><circle cx="466" cy="239" r="16"/><text x="466" y="239">1</text></g>
+                <g class="marker" data-part="underlayment"><circle cx="446" cy="290" r="16"/><text x="446" y="290">2</text></g>
+                <g class="marker" data-part="deck"><circle cx="424" cy="335" r="16"/><text x="424" y="335">3</text></g>
+                <g class="marker" data-part="eave"><circle cx="257" cy="382" r="16"/><text x="257" y="382">4</text></g>
+                <g class="marker" data-part="drip"><circle cx="150" cy="404" r="16"/><text x="150" y="404">5</text></g>
+                <g class="marker" data-part="flashing"><circle cx="616" cy="186" r="16"/><text x="616" y="186">6</text></g>
+                <g class="marker" data-part="ridge"><circle cx="647" cy="114" r="16"/><text x="647" y="114">7</text></g>
+                <g class="marker" data-part="gutter"><circle cx="124" cy="486" r="16"/><text x="124" y="486">8</text></g>
+              </g>
+            </svg>
+            <figcaption>Cut-away, not to scale. Your build-up may differ &mdash; we&rsquo;ll tell you what&rsquo;s actually up there.</figcaption>
+          </figure>
+
+          <div class="anatomy-panel">
+            <div class="parts" role="tablist" aria-label="Roof layers">
+              <button type="button" class="part-btn is-on" role="tab" aria-selected="true" data-target="shingle"><span class="part-btn__n">1</span>Architectural shingles</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="underlayment"><span class="part-btn__n">2</span>Underlayment</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="deck"><span class="part-btn__n">3</span>Roof deck</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="eave"><span class="part-btn__n">4</span>Eave membrane</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="drip"><span class="part-btn__n">5</span>Drip edge</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="flashing"><span class="part-btn__n">6</span>Step &amp; valley flashing</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="ridge"><span class="part-btn__n">7</span>Ridge vent &amp; cap</button>
+              <button type="button" class="part-btn" role="tab" aria-selected="false" data-target="gutter"><span class="part-btn__n">8</span>Gutter &amp; downspout</button>
+            </div>
+
+            <div class="part-copy" aria-live="polite">
+              <div data-panel="shingle" class="is-on">
+                <h3>The weather layer</h3>
+                <p>Laminated tabs with a mineral surface, nailed in overlapping courses so water runs over every joint instead of into it. They shed the rain and take the sun; everything below is there for when they can&rsquo;t.</p>
+              </div>
+              <div data-panel="underlayment" hidden>
+                <h3>The second line</h3>
+                <p>A synthetic sheet rolled over the whole deck. It keeps the house dry while the shingles go on, and keeps it dry again when wind lifts a tab or drives rain sideways.</p>
+              </div>
+              <div data-panel="deck" hidden>
+                <h3>What you stand on</h3>
+                <p>Plywood or OSB. Soft, delaminated or rotten boards get cut out and replaced. A new roof laid over a bad deck is a leak with a warranty on it.</p>
+              </div>
+              <div data-panel="eave" hidden>
+                <h3>Where damage starts</h3>
+                <p>A self-adhering waterproof strip along the bottom edge, where ice dams and wind-blown rain do their worst. Cheap on the day, expensive to add later.</p>
+              </div>
+              <div data-panel="drip" hidden>
+                <h3>The last lip of metal</h3>
+                <p>The lip at the eave that throws water clear of the fascia and into the gutter. Without it, water tracks back under the shingles and rots the trim instead.</p>
+              </div>
+              <div data-panel="flashing" hidden>
+                <h3>Where leaks hide</h3>
+                <p>Metal where the roof meets a wall, a chimney or another plane. Most &ldquo;mystery&rdquo; leaks we open up turn out to be flashing, not shingles.</p>
+              </div>
+              <div data-panel="ridge" hidden>
+                <h3>The roof breathes here</h3>
+                <p>The cap covers the peak; the vent under it lets the attic push out its hottest, wettest air. Seal it shut and the moisture condenses on the underside of the deck.</p>
+              </div>
+              <div data-panel="gutter" hidden>
+                <h3>The exit</h3>
+                <p>Sized to the roof it drains and pitched to its outlet. Wrong size or wrong pitch and the water goes to the foundation instead &mdash; which is a basement problem, not a roof one.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="fld">
-        <span class="lbl" id="matL">Material</span>
-        <div class="seg" role="radiogroup" aria-labelledby="matL" id="matSeg"></div>
-      </div>
-      <div class="fld">
-        <span class="lbl" id="stL">Stories</span>
-        <div class="seg" role="radiogroup" aria-labelledby="stL">
-          <input type="radio" name="stories" id="st1" value="1" checked><label for="st1">One</label>
-          <input type="radio" name="stories" id="st2" value="2"><label for="st2">Two</label>
-          <input type="radio" name="stories" id="st3" value="3"><label for="st3">Three+</label>
+    </section>
+
+    <!-- ═══════════ BUILD SCENE ═══════════ -->
+    <section class="build" id="build" data-build>
+      <div class="build-pin">
+        <div class="wrap build-grid">
+          <div class="build-copy">
+            <p class="eyebrow">How a roof goes on</p>
+            <h2>Four passes.<br><em>No shortcuts.</em></h2>
+            <ol class="build-steps">
+              <li data-step="0" class="is-on">
+                <span class="build-steps__n">01</span>
+                <div>
+                  <h3>Strip &amp; inspect</h3>
+                  <p>Old shingles come off, then every board is walked and sounded. Soft or delaminated deck is cut out before anything goes back on.</p>
+                </div>
+              </li>
+              <li data-step="1">
+                <span class="build-steps__n">02</span>
+                <div>
+                  <h3>Deck &amp; membrane</h3>
+                  <p>Underlayment rolled and lapped the right way, an ice-and-water strip along the eave, and the drip edge set before a single shingle lands.</p>
+                </div>
+              </li>
+              <li data-step="2">
+                <span class="build-steps__n">03</span>
+                <div>
+                  <h3>Shingles &amp; flashing</h3>
+                  <p>Courses laid from the eave up, straight and evenly exposed. Valley metal and step flashing go on before the shingles that cover them.</p>
+                </div>
+              </li>
+              <li data-step="3">
+                <span class="build-steps__n">04</span>
+                <div>
+                  <h3>Ridge &amp; clear-up</h3>
+                  <p>Ridge vent and cap close the top. Then the magnet sweep, the gutters cleared of nails, and a walk-round with you before we leave.</p>
+                </div>
+              </li>
+            </ol>
+            <div class="build-meter" aria-hidden="true"><span data-meter></span></div>
+          </div>
+
+          <div class="build-art" aria-hidden="true">
+            <svg viewBox="0 0 680 560" class="build-svg">
+              <defs>
+                <pattern id="b-wood" width="84" height="30" patternUnits="userSpaceOnUse">
+                  <rect width="84" height="30" fill="#AD7C48"/>
+                  <path d="M0 29.5H84" stroke="#7E5726" stroke-width="2"/>
+                  <path d="M28 29.5V10M60 29.5V10" stroke="#94682F" stroke-width="1.4"/>
+                  <path d="M8 8c9 3 15-3 24 0" stroke="#9E7339" stroke-width="1.2" fill="none" opacity=".7"/>
+                </pattern>
+                <linearGradient id="b-sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#18222B"/>
+                  <stop offset="1" stop-color="#0C1318"/>
+                </linearGradient>
+                <clipPath id="b-plane-clip"><rect x="-6" y="-398" width="578" height="398" rx="3"/></clipPath>
+              </defs>
+
+              <rect width="680" height="560" fill="url(#b-sky)"/>
+
+              <g transform="translate(62 486) rotate(-4)">
+                <g clip-path="url(#b-plane-clip)">
+                  <rect class="b-deck" x="-6" y="-398" width="578" height="398" fill="url(#b-wood)"/>
+                  <g class="b-boards">
+                    <path d="M-6 -318h578M-6 -238h578M-6 -158h578M-6 -78h578" stroke="#8B5F2C" stroke-width="2.4" opacity=".85"/>
+                  </g>
+
+                  <!-- the old roof, still on -->
+                  <g class="b-old">
+                    <rect x="-6" y="-398" width="578" height="398" fill="#423E36"/>
+                    <g fill="#3A362E">
+                      <path d="M-6 -366h578v34H-6zM-6 -298h578v34H-6zM-6 -230h578v34H-6zM-6 -162h578v34H-6zM-6 -94h578v34H-6zM-6 -26h578v34H-6z"/>
+                    </g>
+                    <g fill="#52643C" opacity=".7">
+                      <path d="M96 -300c26-12 54-6 62 8s-14 26-40 24-44-20-22-32z"/>
+                      <path d="M352 -190c30-10 58-2 62 12s-20 24-46 20-38-22-16-32z"/>
+                      <path d="M188 -84c22-10 46-4 50 8s-14 20-34 18-34-18-16-26z"/>
+                    </g>
+                    <g fill="#1E1C17">
+                      <path d="M140 -348h64v22h-64zM402 -262h58v20h-58zM262 -140h60v22h-60z"/>
+                    </g>
+                    <g stroke="#575246" stroke-width="2" opacity=".7">
+                      <path d="M140 -330h64M402 -246h58M262 -122h60"/>
+                    </g>
+                  </g>
+
+                  <!-- underlayment -->
+                  <rect class="b-felt" x="-6" y="-398" width="578" height="398" fill="#28353F"/>
+                  <g class="b-felt-lines" stroke="#465865" stroke-width="1.6" opacity=".8">
+                    <path d="M-6 -336h578M-6 -272h578M-6 -208h578M-6 -144h578M-6 -80h578M-6 -16h578"/>
+                  </g>
+
+                  <!-- shingle courses, built by JS -->
+                  <g class="b-courses"></g>
+
+                  <!-- the cut edge, so the slab reads as a build-up -->
+                  <g class="b-flash">
+                    <path d="M-6 -398h578v9H-6z" fill="#232C34"/>
+                    <rect x="-6" y="-398" width="13" height="48" fill="#3D4852"/>
+                    <rect x="-6" y="-350" width="13" height="9" fill="#26333D"/>
+                    <rect x="-6" y="-341" width="13" height="341" fill="#7C5527"/>
+                    <path d="M7 -398v398" stroke="#0E1519" stroke-width="2"/>
+                    <path d="M-6 -398v398" stroke="#0E1519" stroke-width="2"/>
+                  </g>
+                </g>
+
+                <!-- ridge cap -->
+                <g class="b-ridge">
+                  <rect x="-10" y="-410" width="588" height="22" rx="3" fill="#3A444D"/>
+                  <rect x="-10" y="-410" width="588" height="22" rx="3" fill="none" stroke="#0E1519" stroke-width="2"/>
+                  <path d="M22 -410v22M74 -410v22M126 -410v22M178 -410v22M230 -410v22M282 -410v22M334 -410v22M386 -410v22M438 -410v22M490 -410v22M542 -410v22" stroke="#232D35" stroke-width="2"/>
+                </g>
+                <rect x="-12" y="0" width="596" height="18" rx="3" fill="#161E24"/>
+                <rect x="-12" y="0" width="596" height="18" rx="3" fill="none" stroke="#2C363E" stroke-width="2"/>
+              </g>
+
+              <g class="b-badge" transform="translate(40 46)">
+                <text x="0" y="0" class="b-badge__label">PASS</text>
+                <text x="0" y="46" class="b-badge__num" data-badge>01</text>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
-    </form>
-    <div class="est-out" aria-live="polite">
-      <div>
-        <div class="roof"><svg viewBox="0 0 640 360" aria-hidden="true"><use href="#roofScene"/><path id="estRoof" d="M110 210 L320 70 L530 210 Z" fill="url(#shingle2)"/><path d="M110 210 L320 70 L530 210" fill="none" stroke="#f4d96c" stroke-width="8" stroke-linejoin="round"/></svg></div>
-        <p class="price" id="price">$11,900 – $17,200</p>
-        <p class="price-note" id="priceNote">About 26 squares of asphalt shingle roof, with tear-off and haul-away. Lasts 20–30 years.</p>
+    </section>
+
+    <!-- ═══════════ SERVICES ═══════════ -->
+    <section class="services section" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">What we do</p>
+          <h2>Six kinds of job,<br><em>one standard.</em></h2>
+          <p class="lede">Whether it&rsquo;s a whole roof or one square of tabs after a storm, the work is the same: find the cause, fix it properly, leave the site clean.</p>
+        </div>
+
+        <ul class="service-grid">
+          <li class="service reveal" data-tilt>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 25 24 9l18 16"/><path d="M12 23v16h24V23"/><path d="M20 39V29h8v10"/>
+              </svg>
+            </span>
+            <h3>Roof replacement</h3>
+            <p>Strip to the deck, replace what&rsquo;s rotten, rebuild with new underlayment, metal and architectural shingles.</p>
+            <ul class="service__list">
+              <li>Tear-off &amp; disposal</li>
+              <li>Deck repair</li>
+              <li>Ridge venting</li>
+            </ul>
+          </li>
+
+          <li class="service reveal" data-tilt>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 20 24 7l15 13"/><path d="M15 20v6M22 17v9M30 15v11M37 19v7"/>
+                <path d="M13 32h22v9H13z"/><path d="M18 36.5h12"/>
+              </svg>
+            </span>
+            <h3>Roof repair</h3>
+            <p>Leaks, lifted tabs, failed flashing, wind damage. We find the actual cause and photograph it before we fix it.</p>
+            <ul class="service__list">
+              <li>Leak diagnosis</li>
+              <li>Flashing repair</li>
+              <li>Small section work</li>
+            </ul>
+          </li>
+
+          <li class="service reveal" data-tilt>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M25 6l-6 11h7l-4 10 12-14h-8l3-7z"/><path d="M8 30c5-4 9 3 14 0s9 3 14 0 8 0 8 0"/>
+                <path d="M8 39c5-4 9 3 14 0s9 3 14 0 8 0 8 0"/>
+              </svg>
+            </span>
+            <h3>Storm &amp; insurance work</h3>
+            <p>Emergency tarping, documented damage and a written report your adjuster can work from.</p>
+            <ul class="service__list">
+              <li>Emergency tarp</li>
+              <li>Photo documentation</li>
+              <li>Adjuster reports</li>
+            </ul>
+          </li>
+
+          <li class="service reveal" data-tilt>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 14h32v8a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/><path d="M14 26v8a4 4 0 0 0 4 4h4"/>
+                <path d="M30 26v12h6v6"/><path d="M20 8v6M28 8v6"/>
+              </svg>
+            </span>
+            <h3>Gutters &amp; drainage</h3>
+            <p>Seamless gutter, hangers, downspouts and the grading that keeps the water away from the foundation.</p>
+            <ul class="service__list">
+              <li>Seamless runs</li>
+              <li>Downspout routing</li>
+              <li>Leaf guards</li>
+            </ul>
+          </li>
+
+          <li class="service reveal" data-tilt>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 27 24 22l18 5-18 5z"/><path d="M8 27v4l16 5 16-5v-4"/>
+                <path d="M27 12v6M22 15h10"/>
+              </svg>
+            </span>
+            <h3>Flat &amp; low-slope</h3>
+            <p>TPO and modified bitumen for garages, porches, additions and small commercial roofs.</p>
+            <ul class="service__list">
+              <li>TPO membrane</li>
+              <li>Modified bitumen</li>
+              <li>Drain &amp; scupper</li>
+            </ul>
+          </li>
+
+          <li class="service reveal" data-tilt>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 7l12 5v10c0 9-6 15-12 18-6-3-12-9-12-18V12z"/>
+                <path d="M18 24l4.5 4.5L31 20"/>
+              </svg>
+            </span>
+            <h3>Inspection &amp; maintenance</h3>
+            <p>A yearly look before the weather turns: seals, flashing, fasteners, and a written list of what to watch.</p>
+            <ul class="service__list">
+              <li>Full roof report</li>
+              <li>Sealant refresh</li>
+              <li>Debris removal</li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <a class="btn" id="estCta" href="#contact">Book the free inspection</a>
+    </section>
+
+    <!-- ═══════════ BEFORE / AFTER ═══════════ -->
+    <section class="work section" id="work">
+      <div class="wrap">
+        <div class="section-head section-head--split">
+          <div>
+            <p class="eyebrow">Before &amp; after</p>
+            <h2>Drag it across<br><em>and look closer.</em></h2>
+          </div>
+          <p class="lede">On the left, a roof that had been patched once a year for a decade: lifted tabs, moss in the valleys, water staining the fascia. On the right, the same house after a tear-off and rebuild. Illustrated, not photographed &mdash; we&rsquo;ll photograph your actual roof at the inspection.</p>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <figure class="ba" data-ba style="--split: 52%">
+          <svg class="ba-svg" viewBox="0 0 900 600" role="img" aria-label="Illustration comparing a worn roof surface with a rebuilt one">
+            <defs>
+              <linearGradient id="ba-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#16202A"/>
+                <stop offset="1" stop-color="#0A1015"/>
+              </linearGradient>
+              <linearGradient id="ba-light" x1="0.1" y1="0" x2="0.9" y2="1">
+                <stop offset="0" stop-color="#F5C89B" stop-opacity="0.16"/>
+                <stop offset="0.5" stop-color="#F5C89B" stop-opacity="0.02"/>
+                <stop offset="1" stop-color="#05080B" stop-opacity="0.42"/>
+              </linearGradient>
+              <pattern id="ba-new" width="92" height="92" patternUnits="userSpaceOnUse">
+                <rect width="92" height="92" fill="#313D49"/>
+                <rect y="46" width="92" height="46" fill="#2C3742"/>
+                <path d="M0 41H92" stroke="#495764" stroke-width="1.8" opacity="0.55"/>
+                <path d="M0 41.5H92" stroke="#18222C" stroke-width="5"/>
+                <path d="M30 46V30M61 46V30" stroke="#1A242E" stroke-width="2.6"/>
+                <path d="M0 87H92" stroke="#495764" stroke-width="1.8" opacity="0.55"/>
+                <path d="M0 87.5H92" stroke="#18222C" stroke-width="5"/>
+                <path d="M15 92V74M46 92V74M77 92V74" stroke="#131B23" stroke-width="3"/>
+              </pattern>
+              <pattern id="ba-worn" width="92" height="92" patternUnits="userSpaceOnUse">
+                <rect width="92" height="92" fill="#5C5442"/>
+                <rect y="46" width="92" height="46" fill="#524A39"/>
+                <path d="M0 41H92" stroke="#736A55" stroke-width="1.6" opacity="0.7"/>
+                <path d="M0 41.5H92" stroke="#37301F" stroke-width="5"/>
+                <path d="M24 46V26M56 46V26" stroke="#332C1F" stroke-width="2.6"/>
+                <path d="M0 87H92" stroke="#736A55" stroke-width="1.6" opacity="0.7"/>
+                <path d="M0 87.5H92" stroke="#37301F" stroke-width="5"/>
+                <path d="M9 92V70M40 92V70M71 92V70" stroke="#2E281E" stroke-width="2.6"/>
+              </pattern>
+              <linearGradient id="ba-metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#CBD4D8"/>
+                <stop offset="0.55" stop-color="#9DA9AE"/>
+                <stop offset="1" stop-color="#7A878D"/>
+              </linearGradient>
+              <linearGradient id="ba-metal-dull" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#7E8580"/>
+                <stop offset="1" stop-color="#4F554F"/>
+              </linearGradient>
+              <linearGradient id="ba-trim" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#EDE8DE"/>
+                <stop offset="1" stop-color="#CFC8BA"/>
+              </linearGradient>
+            </defs>
+
+            <rect width="900" height="600" fill="url(#ba-bg)"/>
+
+            <!-- ===== BEFORE ===== -->
+            <g class="ba-before">
+              <rect width="900" height="480" fill="url(#ba-worn)"/>
+              <rect width="900" height="480" fill="url(#ba-light)"/>
+              <circle cx="120" cy="60" r="220" fill="#D98A52" opacity="0.07"/>
+
+              <!-- granule loss -->
+              <g fill="#6A6250" opacity="0.4">
+                <path d="M96 120c46-16 96-6 104 22s-34 46-82 40-70-44-22-62z"/>
+                <path d="M300 268c40-14 84-4 88 20s-34 40-76 34-58-38-12-54z"/>
+              </g>
+
+              <!-- algae running down the slope -->
+              <g fill="#2C3628" opacity="0.42">
+                <path d="M186 0 204 468 220 468 206 0z"/>
+                <path d="M430 0 442 468 462 468 452 0z"/>
+                <path d="M628 0 644 468 660 468 646 0z"/>
+                <path d="M762 0 778 468 790 468 782 0z"/>
+              </g>
+
+              <!-- moss on the lower courses -->
+              <g fill="#55663E" opacity="0.9">
+                <circle cx="128" cy="378" r="18"/><circle cx="156" cy="366" r="13"/><circle cx="176" cy="382" r="16"/>
+                <circle cx="148" cy="396" r="11"/><circle cx="104" cy="390" r="10"/><circle cx="196" cy="398" r="8"/>
+                <circle cx="338" cy="412" r="15"/><circle cx="362" cy="400" r="11"/><circle cx="384" cy="414" r="13"/>
+                <circle cx="356" cy="426" r="8"/><circle cx="404" cy="428" r="7"/>
+                <circle cx="566" cy="392" r="16"/><circle cx="594" cy="382" r="12"/><circle cx="616" cy="398" r="14"/>
+                <circle cx="584" cy="412" r="8"/><circle cx="636" cy="410" r="7"/>
+              </g>
+
+              <!-- tabs that have lifted or torn off -->
+              <g>
+                <path d="M204 252h84v32h-84z" fill="#1B2228"/>
+                <path d="M204 252h84v3h-84z" fill="#5F5847"/>
+                <path d="M250 210h92v26h-92z" fill="#1B2228"/>
+                <path d="M508 318h88v32h-88z" fill="#1B2228"/>
+                <path d="M508 318h88v3h-88z" fill="#5F5847"/>
+                <path d="M636 198h76v28h-76z" fill="#453D2E"/>
+                <path d="M636 198h76v4h-76z" fill="#6E6550"/>
+                <path d="M360 342h72v28h-72z" fill="#1B2228"/>
+                <path d="M360 342h72v3h-72z" fill="#5F5847"/>
+              </g>
+
+              <g fill="#8B8B80">
+                <circle cx="248" cy="272" r="3"/><circle cx="536" cy="338" r="3"/><circle cx="372" cy="358" r="3"/>
+              </g>
+
+              <!-- dirty fascia, sagging gutter -->
+              <rect y="480" width="900" height="30" fill="#574D3E"/>
+              <rect y="480" width="900" height="4" fill="#6E6350"/>
+              <path d="M0 510h900v18q0 10-10 10H10q-10 0-10-10z" fill="url(#ba-metal-dull)"/>
+              <path d="M0 518h900v6H0z" fill="#3E443F"/>
+              <g fill="#3F4A34" opacity="0.8">
+                <path d="M60 470c14-8 32-4 34 4s-16 12-30 8-16-8-4-12z"/>
+                <path d="M700 476c12-8 30-6 32 2s-16 12-28 8-14-6-4-10z"/>
+              </g>
+              <g stroke="#4A4436" stroke-width="10" opacity="0.5" stroke-linecap="round">
+                <path d="M180 492v18M470 496v14M760 492v18"/>
+              </g>
+            </g>
+
+            <!-- ===== AFTER (clipped) ===== -->
+            <g class="ba-after">
+              <rect width="900" height="480" fill="url(#ba-new)"/>
+              <rect width="900" height="480" fill="url(#ba-light)"/>
+
+              <!-- the vent, re-booted -->
+              <g>
+                <ellipse cx="700" cy="176" rx="40" ry="10" fill="#0A1015" opacity="0.5"/>
+                <rect x="688" y="92" width="24" height="84" fill="#4C575D"/>
+                <rect x="688" y="92" width="5" height="84" fill="#68757B"/>
+                <ellipse cx="700" cy="92" rx="12" ry="4.5" fill="#6D797F"/>
+                <ellipse cx="700" cy="84" rx="18" ry="6" fill="#7F8B91"/>
+                <rect x="680" y="76" width="40" height="9" rx="2.5" fill="#8F9A9F"/>
+                <path d="M674 162q26-14 52 0l-5 15q-21-11-42 0z" fill="#8C979C"/>
+              </g>
+
+              <!-- clean trim, new gutter, brackets -->
+              <rect y="480" width="900" height="30" fill="url(#ba-trim)"/>
+              <rect y="480" width="900" height="4" fill="#FFFDF9" opacity="0.7"/>
+              <path d="M0 510h900v20H0z" fill="url(#ba-metal)"/>
+              <path d="M0 520h900v5H0z" fill="#6F7B81"/>
+              <g stroke="#7E8A90" stroke-width="3">
+                <path d="M50 508v24M140 508v24M230 508v24M320 508v24M410 508v24M500 508v24M590 508v24M680 508v24M770 508v24M860 508v24"/>
+              </g>
+            </g>
+          </svg>
+
+          <span class="ba-divider" aria-hidden="true"></span>
+          <span class="ba-tag ba-tag--before">Before</span>
+          <span class="ba-tag ba-tag--after">After</span>
+
+          <button class="ba-handle" type="button" data-ba-handle aria-label="Drag to compare the old roof with the new one" aria-valuemin="4" aria-valuemax="96" aria-valuenow="52" role="slider">
+            <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-handle"></use></svg>
+          </button>
+        </figure>
+        <p class="ba-note">Drag the handle, or use the arrow keys once it&rsquo;s focused.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ PROCESS ═══════════ -->
+    <section class="process section" id="process">
+      <div class="wrap process-grid">
+        <div class="process-head">
+          <p class="eyebrow">The job, start to finish</p>
+          <h2>Five steps,<br><em>and you know all of them.</em></h2>
+          <p class="lede">Nobody likes a contractor who disappears behind a ladder. Here is the whole sequence, including the parts where you get to say no.</p>
+          <div class="process-rail" aria-hidden="true"><span data-rail></span></div>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__n">01</span>
+            <div>
+              <h3>Talk</h3>
+              <p>Tell us what&rsquo;s happening: a stain on the ceiling, tabs in the yard after wind, or a roof you already know is finished. A phone photo helps before we come out.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">02</span>
+            <div>
+              <h3>Inspect</h3>
+              <p>We go up, photograph what we find, and check the deck, the flashings and the attic side &mdash; where the water actually shows up.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">03</span>
+            <div>
+              <h3>Estimate</h3>
+              <p>A written, itemised number: materials, labour, tear-off, disposal, and anything that has to be fixed before the roof can be. No number over the phone.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">04</span>
+            <div>
+              <h3>Build</h3>
+              <p>Crew on site, plantings and driveway protected, noise and dust contained. The site is swept for nails at the end of each day, not just at the end of the job.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">05</span>
+            <div>
+              <h3>Walkthrough</h3>
+              <p>We walk the finished roof with you, hand over the paperwork and the warranty, and stay reachable if anything looks wrong later.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ═══════════ PROMISES ═══════════ -->
+    <section class="promises">
+      <div class="wrap">
+        <ul class="promise-grid">
+          <li class="reveal" data-tilt>
+            <h3>Free inspection</h3>
+            <p>We come out, look properly and tell you the truth &mdash; including when the answer is &ldquo;not yet&rdquo;.</p>
+          </li>
+          <li class="reveal" data-tilt>
+            <h3>Written estimate</h3>
+            <p>Itemised, with the disposal and the deck repair already in it. The number doesn&rsquo;t move once work starts.</p>
+          </li>
+          <li class="reveal" data-tilt>
+            <h3>Warranty in writing</h3>
+            <p>The manufacturer covers the shingles. Our workmanship warranty is on the estimate, not a verbal promise.</p>
+          </li>
+          <li class="reveal" data-tilt>
+            <h3>Clean site, daily</h3>
+            <p>Tarps down, gutters cleared, magnet over the lawn and driveway before we leave each afternoon.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════ FAQ ═══════════ -->
+    <section class="faq section" id="faq">
+      <div class="wrap faq-grid">
+        <div class="section-head">
+          <p class="eyebrow">Straight answers</p>
+          <h2>The questions<br><em>we get asked most.</em></h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>How long does a roof take?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>It depends on the size, the pitch, how many layers have to come off and how much deck repair we find once the old roof is gone. The schedule is written on the estimate, and we tell you the same day if it changes.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What does a new roof cost?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>Price comes from the size, the pitch, the layers to tear off, the condition of the deck and the material you choose. We measure the roof and give you a line-item estimate rather than a per-square number over the phone.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Will you work with my insurance company?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>Yes. For storm damage we document what we find with photographs and measurements, and give you a written report your adjuster can work from. We don&rsquo;t negotiate your claim for you, and we don&rsquo;t invoice you for work the insurer hasn&rsquo;t agreed to.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can you fix part of it instead of replacing everything?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>If a repair is the honest answer, we&rsquo;ll say so &mdash; a section repair, a flashing rebuild or a set of ridge caps. We&rsquo;ll also tell you when a repair is throwing money at a roof that&rsquo;s at the end of its life.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do you cover the roof if it rains while you&rsquo;re working?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>The roof is never left open. We strip and close the same day, and if weather turns we tarp and secure before we leave the site.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What if something goes wrong after you&rsquo;ve gone?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>Call us. Workmanship issues come back to us, and the manufacturer&rsquo;s warranty covers material defects. Both are written on the paperwork we leave with you.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Are you insured?<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>Ask for the certificate at the inspection and we&rsquo;ll email it before any work is scheduled. It should be the first thing you ask any roofer.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ QUOTE ═══════════ -->
+    <section class="quote section" id="quote">
+      <div class="wrap quote-grid">
+        <div class="quote-copy">
+          <p class="eyebrow">Free inspection</p>
+          <h2>Tell us what<br><em>the roof is doing.</em></h2>
+          <p class="lede">One form, one visit. We look at the roof, photograph what we find, and send a written estimate &mdash; whether or not you hire us.</p>
+
+          <ul class="contact-list">
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-phone"></use></svg></span>
+              <span><a href="tel:+15550100199">(555) 010-0199</a><em>Storm damage? Call instead of typing.</em></span>
+            </li>
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-mail"></use></svg></span>
+              <span><a href="mailto:hello@yourfavoriteroofing.example">hello@yourfavoriteroofing.example</a><em>Photos welcome.</em></span>
+            </li>
+            <li>
+              <span class="contact-list__icon"><svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-pin"></use></svg></span>
+              <span>Your city and the towns around it<em>Ask if you&rsquo;re on the edge of the map.</em></span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="quote-form" data-quote-form novalidate>
+          <div class="field-row">
+            <p class="field">
+              <label for="q-name">Name</label>
+              <input id="q-name" name="name" type="text" autocomplete="name" required>
+            </p>
+            <p class="field">
+              <label for="q-phone">Phone</label>
+              <input id="q-phone" name="phone" type="tel" autocomplete="tel" required>
+            </p>
+          </div>
+
+          <div class="field-row">
+            <p class="field">
+              <label for="q-email">Email <span>(optional)</span></label>
+              <input id="q-email" name="email" type="email" autocomplete="email">
+            </p>
+            <p class="field">
+              <label for="q-address">Address or ZIP</label>
+              <input id="q-address" name="address" type="text" autocomplete="postal-code" required>
+            </p>
+          </div>
+
+          <p class="field">
+            <label for="q-job">What&rsquo;s going on?</label>
+            <select id="q-job" name="job" required>
+              <option value="">Choose one</option>
+              <option>Full roof replacement</option>
+              <option>Repair or leak</option>
+              <option>Storm or wind damage</option>
+              <option>Gutters and drainage</option>
+              <option>Flat or low-slope roof</option>
+              <option>Inspection or maintenance</option>
+            </select>
+          </p>
+
+          <p class="field">
+            <label for="q-message">Anything we should know? <span>(optional)</span></label>
+            <textarea id="q-message" name="message" rows="4" placeholder="A stain on the ceiling in the back bedroom, worse after wind."></textarea>
+          </p>
+
+          <p class="field field--honeypot" aria-hidden="true">
+            <label for="q-company">Company</label>
+            <input id="q-company" name="company" type="text" tabindex="-1" autocomplete="off">
+          </p>
+
+          <button class="btn btn--accent btn--block" type="submit" data-submit>
+            Request the inspection
+            <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-arrow"></use></svg>
+          </button>
+
+          <p class="form-note">No charge, no obligation. We&rsquo;ll call before we come out.</p>
+          <p class="form-status" data-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a class="brand brand--footer" href="#top">
+          <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M5 25.5 22 11l17 14.5" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.5 24v12h21V24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+            <path d="M18.5 36v-7h7v7" fill="currentColor"/>
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">Your Favorite</span>
+            <span class="brand-sub">Roofing</span>
+          </span>
+        </a>
+        <p>Replacement, repair and storm work on homes and small commercial roofs. Free inspection, written estimate, clean site.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <h3>Sections</h3>
+        <a href="#anatomy">Roof anatomy</a>
+        <a href="#build">How it&rsquo;s built</a>
+        <a href="#services">Services</a>
+        <a href="#work">Before &amp; after</a>
+        <a href="#process">Process</a>
+        <a href="#faq">Questions</a>
+      </nav>
+
+      <div class="footer-contact">
+        <h3>Get in touch</h3>
+        <a href="tel:+15550100199">(555) 010-0199</a>
+        <a href="mailto:hello@yourfavoriteroofing.example">hello@yourfavoriteroofing.example</a>
+        <a class="btn btn--outline btn--sm" href="#quote">Free inspection</a>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="steps wrap" aria-label="How a roof replacement works">
-  <div class="stage reveal"><div><h2 class="line">First we climb up and look.</h2><p>A free inspection, with photos of everything we find, sent to you the same day.</p></div></div>
-  <div class="stage reveal"><div><p class="line">Then you get it in writing.</p><p>One written quote, line by line, within <span data-c="quoteTurnaround">48 hours</span>. No pressure to sign on the spot.</p></div></div>
-  <div class="stage reveal"><div><p class="line">We tear off and rebuild.</p><p>Most homes take one or two days. Your yard is tarped and the driveway is swept with a magnet for nails.</p></div></div>
-  <div class="stage reveal"><div><p class="line" style="color:var(--ink)">You keep the warranty.</p><p>Manufacturer and workmanship warranty paperwork goes in your hand before final payment.</p></div></div>
-</section>
-
-<!-- SERVICE AREA -->
-<section class="areas wrap" id="areas" aria-labelledby="areas-h">
-  <h2 id="areas-h" class="areas-h">We roof homes in</h2>
-  <p class="towns" id="towns"></p>
-  <div class="facts reveal">
-    <div><b data-c="license">License # CCC0000000</b>State-licensed roofing contractor</div>
-    <div><b>Fully insured</b>Certificate sent on request</div>
-    <div><b data-c="phone">(813) 555-0142</b>Call or text for storm damage</div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gal" id="work" aria-labelledby="gal-h">
-  <h2 id="gal-h">Recent<br>roofs.</h2>
-  <button class="print p1" type="button" aria-label="Project photo placeholder one"><span class="ph"><svg viewBox="0 0 300 400" aria-hidden="true"><rect width="300" height="400" fill="#1a4429"/><path d="M-20 230 L150 90 L320 230 V400 H-20Z" fill="url(#tile)"/></svg><span>Client project photo</span></span></button>
-  <button class="print p2" type="button" aria-label="Project photo placeholder two"><span class="ph"><svg viewBox="0 0 300 400" aria-hidden="true"><rect width="300" height="400" fill="#1a4429"/><path d="M-20 250 L150 110 L320 250 V400 H-20Z" fill="url(#seam)"/></svg><span>Client project photo</span></span></button>
-  <button class="print p3" type="button" aria-label="Project photo placeholder three"><span class="ph"><svg viewBox="0 0 300 400" aria-hidden="true"><rect width="300" height="400" fill="#1a4429"/><path d="M-20 200 L150 60 L320 200 V400 H-20Z" fill="url(#shingle2)"/></svg><span>Before and after</span></span></button>
-  <p class="gal-note">Every job is photographed before, during and after. Ask to see roofs near your street.</p>
-</section>
-
-<!-- FAQ -->
-<section class="faq wrap" id="faq" aria-labelledby="faq-h">
-  <div class="grid">
-    <h2 id="faq-h">Questions people ask us.</h2>
-    <div class="qs">
-      <details><summary>Will insurance pay for my roof?</summary><p>Many policies cover sudden damage from wind, hail or a fallen tree, but not wear from age. We inspect for free, photograph the damage, and can meet your adjuster on the roof. Your policy and adjuster make the final call.</p></details>
-      <details><summary>Repair or replace: how do I know?</summary><p>If the damage is in one area and the roof has years left, we repair it. If it is near the end of its life or leaking in several places, a repair is money spent twice. We show you the photos and tell you which one we would choose for our own home.</p></details>
-      <details><summary>How long does a new roof take?</summary><p>Most shingle roofs are done in one or two days. Metal and tile take longer, and we give you the schedule in your written quote.</p></details>
-      <details><summary>Do I need to be home?</summary><p>Only for the start and the final walkthrough. We need access to the driveway and an outdoor outlet.</p></details>
-      <details><summary>Do you offer financing?</summary><p>Ask during your inspection and we will walk you through the payment options available for your job.</p></details>
-      <details><summary>What warranty do I get?</summary><p>Each roof comes with the material manufacturer's warranty plus our own workmanship warranty. The exact terms for your roof are written in your quote.</p></details>
+    <div class="wrap footer-foot">
+      <p>&copy; <span data-year>2026</span> Your Favorite Roofing. All rights reserved.</p>
+      <p class="footer-demo">Demo template for a fictional company. The name, phone number, email and address are placeholders &mdash; replace them before this goes near a real customer.</p>
     </div>
+  </footer>
+
+  <div class="mobile-bar">
+    <a class="mobile-bar__call" href="tel:+15550100199">
+      <svg class="icon" aria-hidden="true"><use href="/assets/sprite.svg#i-phone"></use></svg>
+      Call
+    </a>
+    <a class="mobile-bar__quote" href="#quote">Free inspection</a>
   </div>
-</section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact" aria-labelledby="contact-h">
-  <div>
-    <h2 id="contact-h" class="ask">Book a free inspection. <strong>Send your address and what you are seeing on the roof.</strong></h2>
-    <div class="ctas">
-      <a class="btn" href="tel:" data-tel>Call <span data-c="phone">(813) 555-0142</span></a>
-      <a class="btn ghost" id="mailCta" href="mailto:">Email us</a>
-    </div>
-  </div>
-  <a class="mail" id="mailBig" href="mailto:"><span data-c="emailUser">hello@</span><span data-c="emailDomain">ridgelineroofing.com</span></a>
-  <div class="corners">
-    <span><span data-c="phone">(813) 555-0142</span> · <span data-c="region">Tampa Bay</span>, <span data-c="state">FL</span></span>
-    <span id="socials"></span>
-  </div>
-</section>
-</main>
-
-<footer aria-labelledby="foot-h">
-  <div class="inv-wrap">
-    <h2 id="foot-h" class="inv">Storm on the way? Call first.</h2>
-    <a class="btn" href="tel:" data-tel>Call <span data-c="phone">(813) 555-0142</span></a>
-  </div>
-  <div class="links">
-    <a href="#services">Services</a><a href="#cost">Roof cost</a><a href="#areas">Service area</a><a href="#faq">Questions</a>
-  </div>
-  <div class="legal"><span>© <span id="yr">2026</span> <span data-c="name">Ridgeline Roofing Co.</span> · <span data-c="license">License # CCC0000000</span></span><span>Illustrations stand in for project photos</span></div>
-  <div class="giant" aria-hidden="true" data-c="shortName">Ridgeline</div>
-</footer>
-
-<div class="callbar" id="callbar"><a href="tel:" data-tel>Call now</a><a href="#contact">Free inspection</a></div>
-
-<script>
-(function(){
-  const S = window.SITE;
-  document.body.classList.remove('no-js');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // --- fill text from config
-  const [eu, ed] = S.email.split('@');
-  const vals = Object.assign({}, S, { emailUser: eu + '@', emailDomain: ed });
-  document.querySelectorAll('[data-c]').forEach(el => { const v = vals[el.dataset.c]; if (v != null) el.textContent = v; });
-  document.querySelectorAll('[data-tel]').forEach(a => a.href = 'tel:' + S.phone.replace(/[^\d+]/g, ''));
-  document.getElementById('yr').textContent = new Date().getFullYear();
-  const c = S.colors, r = document.documentElement.style;
-  r.setProperty('--bg', c.bg); r.setProperty('--surface', c.surface); r.setProperty('--ink', c.ink); r.setProperty('--muted', c.muted); r.setProperty('--accent', c.accent); r.setProperty('--accent-ink', c.accentInk);
-  document.title = S.name + ' | Roof replacement and repair in ' + S.region;
-
-  // services table
-  const tb = document.querySelector('#svcTable tbody');
-  S.services.forEach(s => { const tr = document.createElement('tr'); s.forEach(t => { const td = document.createElement('td'); td.textContent = t; tr.append(td); }); tb.append(tr); });
-
-  // towns
-  const towns = document.getElementById('towns');
-  S.areas.forEach((t, i) => { const sp = document.createElement('span'); sp.className = 'town'; sp.textContent = t + (i < S.areas.length - 1 ? ', ' : '.'); towns.append(sp, document.createTextNode(i < S.areas.length - 1 ? ' ' : '')); });
-  const tEls = [...towns.querySelectorAll('.town')]; let ti = 0;
-  if (tEls.length) { tEls[0].classList.add('lit'); if (!reduced) setInterval(() => { tEls[ti].classList.remove('lit'); ti = (ti + 1) % tEls.length; tEls[ti].classList.add('lit'); }, 2000); }
-
-  // socials
-  const so = document.getElementById('socials');
-  S.social.forEach(s => { const a = document.createElement('a'); a.href = s.url; a.textContent = s.label; so.append(a); });
-
-  // --- estimator
-  const matSeg = document.getElementById('matSeg');
-  const fills = { asphalt: 'url(#shingle2)', metal: 'url(#seam)', tile: 'url(#tile)' };
-  Object.entries(S.materials).forEach(([k, m], i) => {
-    const inp = document.createElement('input'); inp.type = 'radio'; inp.name = 'mat'; inp.id = 'm-' + k; inp.value = k; if (i === 0) inp.checked = true;
-    const lb = document.createElement('label'); lb.htmlFor = inp.id; lb.innerHTML = '<span></span><small></small>';
-    lb.firstChild.textContent = m.label.split(' ').slice(-1)[0].replace(/^./, x => x.toUpperCase());
-    lb.querySelector('small').textContent = '$' + m.low + '–' + m.high + ' /sq';
-    matSeg.append(inp, lb);
-  });
-  const fmt = n => '$' + (Math.round(n / 100) * 100).toLocaleString('en-US');
-  let lastSummary = '';
-  function calc(){
-    const area = +document.getElementById('area').value;
-    const pitch = +document.querySelector('input[name=pitch]:checked').value;
-    const stories = +document.querySelector('input[name=stories]:checked').value;
-    const k = document.querySelector('input[name=mat]:checked').value; const m = S.materials[k];
-    const footprint = area / stories;
-    const squares = Math.ceil(footprint * pitch * 1.1 / 100);
-    const story = stories > 1 ? 1 + (stories - 1) * 0.06 : 1;
-    document.getElementById('areaOut').textContent = area.toLocaleString('en-US') + ' sq ft';
-    document.getElementById('price').textContent = fmt(squares * m.low * story) + ' – ' + fmt(squares * m.high * story);
-    document.getElementById('priceNote').textContent = 'About ' + squares + ' squares of ' + m.label.toLowerCase() + ' roof, with tear-off and haul-away. Lasts ' + m.life + '.';
-    document.getElementById('estRoof').setAttribute('fill', fills[k] || fills.asphalt);
-    lastSummary = 'Home size: ' + area + ' sq ft, ' + stories + ' stor' + (stories > 1 ? 'ies' : 'y') + '\nRoof: ' + document.querySelector('input[name=pitch]:checked + label').firstChild.textContent + ' pitch, ' + m.label + '\nOnline estimate: ' + document.getElementById('price').textContent;
-    setMail();
-  }
-  function setMail(){
-    const body = 'Hi ' + S.shortName + ',\n\nI would like a free roof inspection.\n\nAddress:\nWhat I am seeing on the roof:\nBest time to call:\n\n' + lastSummary + '\n';
-    const href = 'mailto:' + S.email + '?subject=' + encodeURIComponent('Free roof inspection request') + '&body=' + encodeURIComponent(body);
-    document.getElementById('mailCta').href = href; document.getElementById('mailBig').href = href;
-  }
-  document.getElementById('est').addEventListener('input', calc);
-  document.getElementById('est').addEventListener('change', calc);
-  calc();
-
-  // --- reveals
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  // stagger section headings/blocks too
-  document.querySelectorAll('.est .grid, .faq .grid, .gal').forEach(el => { el.classList.add('reveal'); io.observe(el); });
-
-  // --- hero video (from config)
-  if (S.heroVideo) {
-    const f = document.querySelector('#reelTrack .frame');
-    const v = document.createElement('video');
-    v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'metadata';
-    if (S.heroPoster) v.poster = S.heroPoster;
-    v.src = S.heroVideo; v.setAttribute('aria-label', 'Video of our crew at work');
-    f.replaceChildren(v);
-    if (!reduced) v.play().catch(() => {});
-  }
-
-  // --- hero reel (pinned story)
-  const hero = document.querySelector('.hero'), track = document.getElementById('reelTrack');
-  const caps = ['Shingle', 'Standing-seam metal', 'Clay tile', 'Shingle'];
-  const desktop = matchMedia('(min-width: 721px)');
-  let ticking = false;
-  function onScroll(){
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(() => {
-      ticking = false;
-      if (desktop.matches && !reduced) {
-        const rect = hero.getBoundingClientRect();
-        const p = Math.min(1, Math.max(0, -rect.top / (hero.offsetHeight - innerHeight)));
-        const fh = track.firstElementChild.getBoundingClientRect().height + 24;
-        const pos = p * 3;
-        track.style.transform = 'translateY(' + (-pos * fh) + 'px)';
-      } else { track.style.transform = ''; }
-      document.getElementById('callbar').classList.toggle('on', scrollY > innerHeight * 0.6);
-    });
-  }
-  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); onScroll();
-
-  // --- showcase stages
-  const show = document.querySelector('.show');
-  function stage(){
-    const t = show.getBoundingClientRect().top, h = show.offsetHeight;
-    const p = (-t) / (h - innerHeight);
-    show.classList.toggle('s2', p > 0.3 && p <= 0.62);
-    show.classList.toggle('s3', p > 0.62);
-  }
-  if (!reduced) { addEventListener('scroll', () => requestAnimationFrame(stage), { passive: true }); stage(); }
-
-
-  // --- gallery prints: tap to bring forward
-  document.querySelectorAll('.print').forEach(p => p.addEventListener('click', () => { document.querySelectorAll('.print').forEach(x => x.style.zIndex = ''); p.style.zIndex = 6; }));
-
-  // --- structured data from config
-  const ld = { '@context': 'https://schema.org', '@type': 'RoofingContractor', name: S.name, telephone: S.phone, email: S.email, areaServed: S.areas, address: { '@type': 'PostalAddress', streetAddress: S.street || undefined, addressLocality: S.city, addressRegion: S.state } };
-  const sc = document.createElement('script'); sc.type = 'application/ld+json'; sc.textContent = JSON.stringify(ld); document.head.append(sc);
-})();
-</script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/motion.js" defer></script>
 </body>
 </html>

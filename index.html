@@ -15,7 +15,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="assets/fonts/roboto-slab-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="preload" as="image" href="assets/img/hero-sky.webp">
+    <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/motion.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -66,87 +67,26 @@
     <section class="hero" id="top">
       <div class="hero-scene" aria-hidden="true">
         <svg class="hero-svg" viewBox="0 0 1200 780" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="h-sky" x1="0" y1="0" x2="0.05" y2="1">
-              <stop offset="0" stop-color="#080C10"/>
-              <stop offset="0.4" stop-color="#15202A"/>
-              <stop offset="0.7" stop-color="#2C3A44"/>
-              <stop offset="0.87" stop-color="#5D4D43"/>
-              <stop offset="1" stop-color="#8B6244"/>
-            </linearGradient>
-            <radialGradient id="h-sun" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#F2B582" stop-opacity="0.85"/>
-              <stop offset="0.42" stop-color="#D98A52" stop-opacity="0.4"/>
-              <stop offset="1" stop-color="#C97545" stop-opacity="0"/>
-            </radialGradient>
-            <pattern id="h-courses" width="96" height="88" patternUnits="userSpaceOnUse" patternTransform="rotate(-26)">
-              <rect width="96" height="88" fill="#232D36"/>
-              <rect y="44" width="96" height="44" fill="#1F2831"/>
-              <path d="M0 43.5H96M0 87.5H96" stroke="#121A21" stroke-width="3"/>
-              <path d="M32 43.5V31M64 43.5V31" stroke="#121A21" stroke-width="2.2"/>
-              <path d="M16 87.5V75M48 87.5V75M80 87.5V75" stroke="#121A21" stroke-width="2.2"/>
-              <path d="M0 31H96M0 75H96" stroke="#2E3B45" stroke-width="1.1" opacity="0.45"/>
-            </pattern>
-            <linearGradient id="h-shade" x1="0.1" y1="0.1" x2="0.75" y2="1">
-              <stop offset="0" stop-color="#0B1015" stop-opacity="0"/>
-              <stop offset="0.5" stop-color="#0B1015" stop-opacity="0.28"/>
-              <stop offset="1" stop-color="#080C10" stop-opacity="0.82"/>
-            </linearGradient>
-            <linearGradient id="h-gutter" x1="0" y1="0" x2="1" y2="0.3">
-              <stop offset="0" stop-color="#9EA9AF"/>
-              <stop offset="0.6" stop-color="#77848B"/>
-              <stop offset="1" stop-color="#55626A"/>
-            </linearGradient>
-          </defs>
-
-          <rect width="1200" height="780" fill="url(#h-sky)"/>
+          <!-- rendered layers from tools/render_hero.py; each sits where the old vector drawing was -->
+          <rect width="1200" height="780" fill="#1b2630"/>
+          <image href="assets/img/hero-sky.webp" width="1200" height="780" preserveAspectRatio="none"/>
 
           <g class="hero-layer" data-depth="0.12">
-            <circle cx="1004" cy="246" r="236" fill="url(#h-sun)"/>
-            <circle cx="1004" cy="246" r="57" fill="#F4C393"/>
-            <circle cx="1004" cy="246" r="57" fill="none" stroke="#FBD9B6" stroke-width="1.5" opacity="0.6"/>
+            <image href="assets/img/hero-sun.webp" x="744" y="-14" width="520" height="520"/>
           </g>
 
-          <g class="hero-clouds" fill="#E8DCCB" opacity="0.1">
-            <path d="M120 196h236a24 24 0 0 0 0-48h-26a36 36 0 0 0-66-12 30 30 0 0 0-40 24H120z"/>
-            <path d="M700 118h176a20 20 0 0 0 0-40h-22a30 30 0 0 0-56-9 26 26 0 0 0-34 21h-64z"/>
-            <path d="M366 318h196a18 18 0 0 0 0-36h-24a28 28 0 0 0-52-8 24 24 0 0 0-30 20h-90z"/>
+          <g class="hero-clouds">
+            <image href="assets/img/hero-clouds.webp" x="-60" y="0" width="1320" height="470"/>
           </g>
 
           <!-- distant treeline -->
-          <g class="hero-layer" data-depth="0.28" fill="#0D151B">
-            <path d="M0 622c48-14 78-34 112-34s48 16 80 12 38-24 70-24 46 24 82 28 52-10 84-6 46 18 76 10 42-22 72-18 48 26 78 30 46-8 78-4v334H0z"/>
-            <g opacity="0.85">
-              <path d="M64 622l26-58 26 58zM112 622l20-44 20 44zM948 622l22-50 22 50z"/>
-            </g>
+          <g class="hero-layer" data-depth="0.28">
+            <image href="assets/img/hero-trees.webp" x="0" y="470" width="1200" height="390"/>
           </g>
 
-          <!-- the roof plane, bottom right -->
+          <!-- the roof corner, bottom right: shingles, vent, fascia, gutter -->
           <g class="hero-house" data-depth="0.5">
-            <clipPath id="h-plane"><polygon points="560,780 1200,432 1200,780"/></clipPath>
-            <g clip-path="url(#h-plane)">
-              <rect x="520" y="380" width="720" height="440" fill="url(#h-courses)"/>
-              <rect x="520" y="380" width="720" height="440" fill="url(#h-shade)"/>
-              <g>
-                <ellipse cx="868" cy="716" rx="36" ry="9" fill="#080C10" opacity="0.45"/>
-                <rect x="854" y="640" width="28" height="76" fill="#586469"/>
-                <ellipse cx="868" cy="640" rx="14" ry="5.5" fill="#75828A"/>
-                <ellipse cx="868" cy="630" rx="20" ry="6.5" fill="#8C979D"/>
-                <rect x="848" y="622" width="40" height="9" rx="2.5" fill="#9BA6AB"/>
-              </g>
-            </g>
-
-            <!-- eave shadow, fascia, gutter -->
-            <g>
-              <path d="M560 780 1200 432" stroke="#080C10" stroke-width="40" stroke-linecap="round" opacity="0.85"/>
-              <path d="M557 775 1197 427" stroke="#2A343B" stroke-width="15" stroke-linecap="round"/>
-              <path d="M556 772 1196 424" stroke="#3C474E" stroke-width="4" stroke-linecap="round"/>
-              <path d="M549 757 1189 409" stroke="url(#h-gutter)" stroke-width="11" stroke-linecap="round"/>
-              <path d="M546 752 1186 404" stroke="#B9C3C7" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
-              <g stroke="#5C686E" stroke-width="2.4" opacity="0.75">
-                <path d="M610 739l10 6M714 683l10 6M818 627l10 6M922 571l10 6M1026 515l10 6M1130 459l10 6"/>
-              </g>
-            </g>
+            <image href="assets/img/hero-roof.webp" x="500" y="370" width="700" height="410"/>
           </g>
         </svg>
       </div>
